@@ -8,11 +8,10 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.16/index.css" rel="stylesheet">
     
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK (Removed Storage) -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,10 +34,8 @@
         .category-card:hover { transform: scale(1.05); }
         input, select, textarea { transition: all 0.3s; }
         input:focus, select:focus, textarea:focus { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
-        .image-preview { width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; margin-top: 0.5rem; }
-        .upload-area { border: 2px dashed #16a34a; border-radius: 0.5rem; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; }
-        .upload-area:hover { background: #f0fdf4; border-color: #15803d; }
         .product-image { width: 100%; height: 250px; object-fit: cover; }
+        .image-url-input { border: 2px dashed #16a34a; border-radius: 0.5rem; padding: 1rem; }
     </style>
 </head>
 <body>
@@ -264,10 +261,10 @@
         <div class="glass-panel p-8">
             <h3 class="text-2xl font-bold text-gray-800 mb-6"><i class="ri-add-circle-line"></i> Post New Ad</h3>
             
-            <div id="postSuccess" class="alert alert-success" style="display: flex;"><i class="ri-checkbox-circle-fill"></i> <span>Ad posted successfully!</span></div>
+            <div id="postSuccess" class="alert alert-success" style="display: none;"><i class="ri-checkbox-circle-fill"></i> <span>Ad posted successfully!</span></div>
             <div id="postError" class="alert alert-error"><i class="ri-error-warning-fill"></i> <span id="postErrorText"></span></div>
 
-            <form id="postAdForm" class="space-y-4" enctype="multipart/form-data">
+            <form id="postAdForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Product Title *</label>
                     <input type="text" id="adTitle" required placeholder="e.g., Fresh Tomatoes, Dairy Cow, Tractor" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
@@ -297,17 +294,19 @@
                     <textarea id="adDescription" required rows="4" placeholder="Describe your product: quantity, quality, harvest date, etc." class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none"></textarea>
                 </div>
 
-                <!-- Image Upload -->
+                <!-- Image URL Input (Instead of Upload) -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Photo</label>
-                    <div class="upload-area" onclick="document.getElementById('adImage').click()">
-                        <i class="ri-upload-cloud-2-line text-4xl text-green-600 mb-2"></i>
-                        <p class="text-gray-600">Click to upload image</p>
-                        <p class="text-sm text-gray-500">or drag and drop (JPG, PNG - Max 5MB)</p>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Photo URL (Optional)</label>
+                    <div class="image-url-input">
+                        <i class="ri-image-line text-green-600 mr-2"></i>
+                        <input type="url" id="adImageUrl" placeholder="https://example.com/image.jpg or leave empty" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none">
+                        <p class="text-xs text-gray-500 mt-2">💡 Tip: Paste an image link from Google or leave empty for icon</p>
+                        <p class="text-xs text-gray-500">Example: https://images.unsplash.com/photo-tomato</p>
                     </div>
-                    <input type="file" id="adImage" accept="image/*" class="hidden" onchange="previewImage(this)">
-                    <img id="imagePreview" class="image-preview hidden" alt="Preview">
-                    <p class="text-xs text-gray-500 mt-1">* Optional but recommended - ads with photos get 10x more views!</p>
+                    <div id="imagePreviewContainer" class="hidden mt-2">
+                        <img id="imagePreview" class="product-image rounded-lg" alt="Preview">
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">* Optional - ads with photos get 10x more views!</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -356,10 +355,8 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
-    const storage = firebase.storage();
     let currentUser = null;
     let currentUserData = null;
-    let selectedImageFile = null;
 
     // Auth State
     auth.onAuthStateChanged(async user => {
@@ -370,7 +367,6 @@
                 if (userDoc.exists) {
                     currentUserData = userDoc.data();
                 } else {
-                    // Create user doc if doesn't exist
                     currentUserData = {
                         fullName: user.email.split('@')[0],
                         email: user.email,
@@ -464,21 +460,24 @@
         }
     });
 
-    // Image Preview
-    function previewImage(input) {
-        if (input.files && input.files[0]) {
-            selectedImageFile = input.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('imagePreview');
-                preview.src = e.target.result;
-                preview.classList.remove('hidden');
+    // Image URL Preview
+    document.getElementById('adImageUrl').addEventListener('input', function(e) {
+        const url = e.target.value.trim();
+        const previewContainer = document.getElementById('imagePreviewContainer');
+        const preview = document.getElementById('imagePreview');
+        
+        if (url && url.startsWith('http')) {
+            preview.src = url;
+            previewContainer.classList.remove('hidden');
+            preview.onerror = function() {
+                previewContainer.classList.add('hidden');
             };
-            reader.readAsDataURL(input.files[0]);
+        } else {
+            previewContainer.classList.add('hidden');
         }
-    }
+    });
 
-    // Post Ad with Image Upload
+    // Post Ad (No Image Upload - Just URL)
     document.getElementById('postAdForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
@@ -500,21 +499,12 @@
         const successDiv = document.getElementById('postSuccess');
         
         btn.disabled = true;
-        btn.innerHTML = '<div class="loading-spinner"></div> Uploading...';
+        btn.innerHTML = '<div class="loading-spinner"></div> Posting...';
         errorDiv.style.display = 'none';
         successDiv.style.display = 'none';
 
         try {
-            let imageUrl = '';
-            
-            // Upload image if selected
-            if (selectedImageFile) {
-                const storageRef = storage.ref();
-                const imageRef = storageRef.child(`product-images/${currentUser.uid}/${Date.now()}_${selectedImageFile.name}`);
-                const uploadTask = await imageRef.put(selectedImageFile);
-                imageUrl = await uploadTask.ref.getDownloadURL();
-            }
-
+            const imageUrl = document.getElementById('adImageUrl').value.trim();
             const sellerName = currentUserData && currentUserData.fullName ? currentUserData.fullName : currentUser.email.split('@')[0];
 
             await db.collection('products').add({
@@ -525,7 +515,7 @@
                 location: document.getElementById('adLocation').value.trim(),
                 phone: document.getElementById('adPhone').value.trim(),
                 quantity: document.getElementById('adQuantity').value.trim(),
-                imageUrl: imageUrl,
+                imageUrl: imageUrl || '',
                 sellerId: currentUser.uid,
                 sellerName: sellerName,
                 sellerEmail: currentUser.email,
@@ -535,8 +525,7 @@
 
             successDiv.style.display = 'flex';
             this.reset();
-            document.getElementById('imagePreview').classList.add('hidden');
-            selectedImageFile = null;
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
             
             setTimeout(() => {
                 showTab('myads');
@@ -616,7 +605,10 @@
         return `
             <div class="product-card">
                 ${product.imageUrl 
-                    ? `<img src="${product.imageUrl}" alt="${product.title}" class="product-image">`
+                    ? `<img src="${product.imageUrl}" alt="${product.title}" class="product-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                       <div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative hidden">
+                        <i class="${icon} text-7xl text-white/50"></i>
+                       </div>`
                     : `<div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative">
                         <i class="${icon} text-7xl text-white/50"></i>
                         <span class="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold text-green-800">
