@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriMarket - Buy & Sell Agricultural Products</title>
+    <title>AgriMarket Ethiopia - Buy & Sell Agricultural Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.16/index.css" rel="stylesheet">
@@ -12,6 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,10 +30,15 @@
         .nav-bar { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); }
         .alert { padding: 0.75rem 1rem; border-radius: 0.5rem; margin-bottom: 1rem; display: none; }
         .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
         .category-card { background: linear-gradient(135deg, #86efac 0%, #4ade80 100%); transition: all 0.3s; }
         .category-card:hover { transform: scale(1.05); }
         input, select, textarea { transition: all 0.3s; }
         input:focus, select:focus, textarea:focus { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
+        .image-preview { width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem; margin-top: 0.5rem; }
+        .upload-area { border: 2px dashed #16a34a; border-radius: 0.5rem; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .upload-area:hover { background: #f0fdf4; border-color: #15803d; }
+        .product-image { width: 100%; height: 250px; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -258,7 +264,10 @@
         <div class="glass-panel p-8">
             <h3 class="text-2xl font-bold text-gray-800 mb-6"><i class="ri-add-circle-line"></i> Post New Ad</h3>
             
-            <form id="postAdForm" class="space-y-4">
+            <div id="postSuccess" class="alert alert-success" style="display: flex;"><i class="ri-checkbox-circle-fill"></i> <span>Ad posted successfully!</span></div>
+            <div id="postError" class="alert alert-error"><i class="ri-error-warning-fill"></i> <span id="postErrorText"></span></div>
+
+            <form id="postAdForm" class="space-y-4" enctype="multipart/form-data">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Product Title *</label>
                     <input type="text" id="adTitle" required placeholder="e.g., Fresh Tomatoes, Dairy Cow, Tractor" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
@@ -286,6 +295,19 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
                     <textarea id="adDescription" required rows="4" placeholder="Describe your product: quantity, quality, harvest date, etc." class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none"></textarea>
+                </div>
+
+                <!-- Image Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Photo</label>
+                    <div class="upload-area" onclick="document.getElementById('adImage').click()">
+                        <i class="ri-upload-cloud-2-line text-4xl text-green-600 mb-2"></i>
+                        <p class="text-gray-600">Click to upload image</p>
+                        <p class="text-sm text-gray-500">or drag and drop (JPG, PNG - Max 5MB)</p>
+                    </div>
+                    <input type="file" id="adImage" accept="image/*" class="hidden" onchange="previewImage(this)">
+                    <img id="imagePreview" class="image-preview hidden" alt="Preview">
+                    <p class="text-xs text-gray-500 mt-1">* Optional but recommended - ads with photos get 10x more views!</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -334,14 +356,32 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
+    const storage = firebase.storage();
     let currentUser = null;
     let currentUserData = null;
+    let selectedImageFile = null;
 
     // Auth State
     auth.onAuthStateChanged(async user => {
         if (user) {
             currentUser = user;
-            currentUserData = await db.collection('users').doc(user.uid).get().then(doc => doc.data());
+            try {
+                const userDoc = await db.collection('users').doc(user.uid).get();
+                if (userDoc.exists) {
+                    currentUserData = userDoc.data();
+                } else {
+                    // Create user doc if doesn't exist
+                    currentUserData = {
+                        fullName: user.email.split('@')[0],
+                        email: user.email,
+                        uid: user.uid
+                    };
+                    await db.collection('users').doc(user.uid).set(currentUserData);
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                currentUserData = { fullName: user.email.split('@')[0], email: user.email };
+            }
             document.getElementById('authSection').classList.add('hidden');
             document.getElementById('dashboardSection').classList.remove('hidden');
             loadRecentProducts();
@@ -349,6 +389,8 @@
         } else {
             document.getElementById('authSection').classList.remove('hidden');
             document.getElementById('dashboardSection').classList.add('hidden');
+            currentUser = null;
+            currentUserData = null;
         }
     });
 
@@ -422,15 +464,59 @@
         }
     });
 
-    // Post Ad
+    // Image Preview
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            selectedImageFile = input.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('imagePreview');
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // Post Ad with Image Upload
     document.getElementById('postAdForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
+        // Ensure user data is loaded
+        if (!currentUserData) {
+            try {
+                const userDoc = await db.collection('users').doc(currentUser.uid).get();
+                if (userDoc.exists) {
+                    currentUserData = userDoc.data();
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
         const btn = document.getElementById('postBtn');
+        const errorDiv = document.getElementById('postError');
+        const errorText = document.getElementById('postErrorText');
+        const successDiv = document.getElementById('postSuccess');
+        
         btn.disabled = true;
-        btn.innerHTML = '<div class="loading-spinner"></div> Posting...';
+        btn.innerHTML = '<div class="loading-spinner"></div> Uploading...';
+        errorDiv.style.display = 'none';
+        successDiv.style.display = 'none';
 
         try {
+            let imageUrl = '';
+            
+            // Upload image if selected
+            if (selectedImageFile) {
+                const storageRef = storage.ref();
+                const imageRef = storageRef.child(`product-images/${currentUser.uid}/${Date.now()}_${selectedImageFile.name}`);
+                const uploadTask = await imageRef.put(selectedImageFile);
+                imageUrl = await uploadTask.ref.getDownloadURL();
+            }
+
+            const sellerName = currentUserData && currentUserData.fullName ? currentUserData.fullName : currentUser.email.split('@')[0];
+
             await db.collection('products').add({
                 title: document.getElementById('adTitle').value.trim(),
                 category: document.getElementById('adCategory').value,
@@ -439,19 +525,29 @@
                 location: document.getElementById('adLocation').value.trim(),
                 phone: document.getElementById('adPhone').value.trim(),
                 quantity: document.getElementById('adQuantity').value.trim(),
+                imageUrl: imageUrl,
                 sellerId: currentUser.uid,
-                sellerName: currentUserData.fullName,
+                sellerName: sellerName,
                 sellerEmail: currentUser.email,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 status: 'active'
             });
 
-            alert('✅ Ad posted successfully!');
+            successDiv.style.display = 'flex';
             this.reset();
-            showTab('myads');
-            loadMyAds();
+            document.getElementById('imagePreview').classList.add('hidden');
+            selectedImageFile = null;
+            
+            setTimeout(() => {
+                showTab('myads');
+                loadMyAds();
+                successDiv.style.display = 'none';
+            }, 1500);
+            
         } catch (error) {
-            alert('Error posting ad: ' + error.message);
+            errorText.textContent = 'Error posting ad: ' + error.message;
+            errorDiv.style.display = 'flex';
+            console.error('Post ad error:', error);
         } finally {
             btn.disabled = false;
             btn.innerHTML = '<i class="ri-upload-cloud-line"></i> Post Ad Now';
@@ -491,7 +587,7 @@
 
         // Apply client-side filters
         if (filters.location) {
-            products = products.filter(p => p.location.toLowerCase().includes(filters.location.toLowerCase()));
+            products = products.filter(p => p.location && p.location.toLowerCase().includes(filters.location.toLowerCase()));
         }
         if (filters.maxPrice) {
             products = products.filter(p => p.price <= filters.maxPrice);
@@ -519,12 +615,15 @@
 
         return `
             <div class="product-card">
-                <div class="h-48 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative">
-                    <i class="${icon} text-6xl text-white/50"></i>
-                    <span class="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold text-green-800">
-                        ${product.category}
-                    </span>
-                </div>
+                ${product.imageUrl 
+                    ? `<img src="${product.imageUrl}" alt="${product.title}" class="product-image">`
+                    : `<div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative">
+                        <i class="${icon} text-7xl text-white/50"></i>
+                        <span class="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold text-green-800">
+                            ${product.category}
+                        </span>
+                    </div>`
+                }
                 <div class="p-4">
                     <h3 class="font-bold text-lg text-gray-800 mb-1">${product.title}</h3>
                     <p class="text-green-600 font-bold text-xl mb-2">${product.price.toLocaleString()} ETB</p>
@@ -535,11 +634,11 @@
                         <a href="tel:${product.phone}" class="flex-1 bg-green-600 text-white py-2 rounded-lg text-center font-medium hover:bg-green-700 transition">
                             <i class="ri-phone-line"></i> Call
                         </a>
-                        <a href="https://wa.me/${product.phone.replace('+', '')}" target="_blank" class="flex-1 bg-emerald-600 text-white py-2 rounded-lg text-center font-medium hover:bg-emerald-700 transition">
+                        <a href="https://wa.me/${product.phone.replace('+', '').replace(/\s/g, '')}" target="_blank" class="flex-1 bg-emerald-600 text-white py-2 rounded-lg text-center font-medium hover:bg-emerald-700 transition">
                             <i class="ri-whatsapp-line"></i> WhatsApp
                         </a>
                     </div>
-                    <p class="text-xs text-gray-500 mt-2 text-center">Seller: ${product.sellerName}</p>
+                    <p class="text-xs text-gray-500 mt-2 text-center">Seller: ${product.sellerName || 'Unknown'}</p>
                 </div>
             </div>
         `;
@@ -570,6 +669,8 @@
 
     // Load My Ads
     async function loadMyAds() {
+        if (!currentUser) return;
+        
         const snapshot = await db.collection('products')
             .where('sellerId', '==', currentUser.uid)
             .orderBy('createdAt', 'desc')
@@ -589,20 +690,23 @@
 
     // Load Stats
     async function loadStats() {
-        const productsSnapshot = await db.collection('products').where('status', '==', 'active').count().get();
-        document.getElementById('totalProducts').textContent = productsSnapshot.data().count;
+        try {
+            const productsSnapshot = await db.collection('products').where('status', '==', 'active').count().get();
+            document.getElementById('totalProducts').textContent = productsSnapshot.data().count;
 
-        const usersSnapshot = await db.collection('users').count().get();
-        document.getElementById('totalFarmers').textContent = usersSnapshot.data().count;
+            const usersSnapshot = await db.collection('users').count().get();
+            document.getElementById('totalFarmers').textContent = usersSnapshot.data().count;
 
-        // Count unique locations
-        const locationsSnapshot = await db.collection('products').get();
-        const uniqueLocations = new Set();
-        locationsSnapshot.forEach(doc => {
-            const data = doc.data();
-            if (data.location) uniqueLocations.add(data.location);
-        });
-        document.getElementById('totalRegions').textContent = uniqueLocations.size;
+            const locationsSnapshot = await db.collection('products').get();
+            const uniqueLocations = new Set();
+            locationsSnapshot.forEach(doc => {
+                const data = doc.data();
+                if (data.location) uniqueLocations.add(data.location);
+            });
+            document.getElementById('totalRegions').textContent = uniqueLocations.size;
+        } catch (error) {
+            console.error('Error loading stats:', error);
+        }
     }
 
     // Tab Navigation
