@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.16/index.css" rel="stylesheet">
     
-    <!-- Firebase SDK (Removed Storage) -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -35,7 +35,12 @@
         input, select, textarea { transition: all 0.3s; }
         input:focus, select:focus, textarea:focus { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
         .product-image { width: 100%; height: 250px; object-fit: cover; }
-        .image-url-input { border: 2px dashed #16a34a; border-radius: 0.5rem; padding: 1rem; }
+        .product-video { width: 100%; height: 250px; object-fit: cover; }
+        .upload-area { border: 2px dashed #16a34a; border-radius: 0.5rem; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; background: #f0fdf4; }
+        .upload-area:hover { background: #dcfce7; border-color: #15803d; }
+        .upload-preview { max-width: 100%; max-height: 200px; border-radius: 0.5rem; margin-top: 1rem; }
+        .progress-bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #16a34a, #15803d); transition: width 0.3s; }
     </style>
 </head>
 <body>
@@ -294,19 +299,43 @@
                     <textarea id="adDescription" required rows="4" placeholder="Describe your product: quantity, quality, harvest date, etc." class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none"></textarea>
                 </div>
 
-                <!-- Image URL Input (Instead of Upload) -->
+                <!-- Image Upload -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Photo URL (Optional)</label>
-                    <div class="image-url-input">
-                        <i class="ri-image-line text-green-600 mr-2"></i>
-                        <input type="url" id="adImageUrl" placeholder="https://example.com/image.jpg or leave empty" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none">
-                        <p class="text-xs text-gray-500 mt-2">💡 Tip: Paste an image link from Google or leave empty for icon</p>
-                        <p class="text-xs text-gray-500">Example: https://images.unsplash.com/photo-tomato</p>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Photo</label>
+                    <div class="upload-area" onclick="document.getElementById('adImage').click()">
+                        <i class="ri-image-add-line text-4xl text-green-600 mb-2"></i>
+                        <p class="text-gray-700 font-medium">Click to upload image</p>
+                        <p class="text-sm text-gray-500">or drag and drop (JPG, PNG - Max 10MB)</p>
                     </div>
-                    <div id="imagePreviewContainer" class="hidden mt-2">
-                        <img id="imagePreview" class="product-image rounded-lg" alt="Preview">
+                    <input type="file" id="adImage" accept="image/*" class="hidden" onchange="handleImageUpload(this)">
+                    <div id="imagePreviewContainer" class="hidden">
+                        <img id="imagePreview" class="upload-preview" alt="Preview">
+                        <button type="button" onclick="removeImage()" class="mt-2 text-red-600 text-sm hover:underline">Remove image</button>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">* Optional - ads with photos get 10x more views!</p>
+                    <div id="imageProgress" class="hidden">
+                        <div class="progress-bar"><div id="imageProgressFill" class="progress-fill" style="width: 0%"></div></div>
+                        <p class="text-xs text-gray-500 mt-1">Uploading image...</p>
+                    </div>
+                </div>
+
+                <!-- Video Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Video (Optional)</label>
+                    <div class="upload-area" onclick="document.getElementById('adVideo').click()">
+                        <i class="ri-video-add-line text-4xl text-green-600 mb-2"></i>
+                        <p class="text-gray-700 font-medium">Click to upload video</p>
+                        <p class="text-sm text-gray-500">MP4, WebM - Max 50MB</p>
+                    </div>
+                    <input type="file" id="adVideo" accept="video/*" class="hidden" onchange="handleVideoUpload(this)">
+                    <div id="videoPreviewContainer" class="hidden">
+                        <video id="videoPreview" class="upload-preview" controls></video>
+                        <button type="button" onclick="removeVideo()" class="mt-2 text-red-600 text-sm hover:underline">Remove video</button>
+                    </div>
+                    <div id="videoProgress" class="hidden">
+                        <div class="progress-bar"><div id="videoProgressFill" class="progress-fill" style="width: 0%"></div></div>
+                        <p class="text-xs text-gray-500 mt-1">Uploading video...</p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">* Videos help sell faster!</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -352,11 +381,19 @@
         appId: "1:266476222439:web:f1f06c9bb1b17775d3af42"
     };
 
+    // ☁️ CLOUDINARY CONFIG (Already configured!)
+    const CLOUDINARY_CONFIG = {
+        cloudName: 'de5casjbu',
+        uploadPreset: 'agrimarket'
+    };
+
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
     let currentUser = null;
     let currentUserData = null;
+    let uploadedImageUrl = '';
+    let uploadedVideoUrl = '';
 
     // Auth State
     auth.onAuthStateChanged(async user => {
@@ -460,28 +497,116 @@
         }
     });
 
-    // Image URL Preview
-    document.getElementById('adImageUrl').addEventListener('input', function(e) {
-        const url = e.target.value.trim();
-        const previewContainer = document.getElementById('imagePreviewContainer');
-        const preview = document.getElementById('imagePreview');
-        
-        if (url && url.startsWith('http')) {
-            preview.src = url;
-            previewContainer.classList.remove('hidden');
-            preview.onerror = function() {
-                previewContainer.classList.add('hidden');
-            };
-        } else {
-            previewContainer.classList.add('hidden');
+    // Upload to Cloudinary
+    async function uploadToCloudinary(file, resourceType = 'image') {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_CONFIG.uploadPreset);
+        if (resourceType !== 'image') {
+            formData.append('resource_type', resourceType);
         }
-    });
 
-    // Post Ad (No Image Upload - Just URL)
+        const url = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/${resourceType}/upload`;
+        
+        const xhr = new XMLHttpRequest();
+        const promise = new Promise((resolve, reject) => {
+            xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                    const percent = (e.loaded / e.total) * 100;
+                    if (resourceType === 'image') {
+                        document.getElementById('imageProgressFill').style.width = percent + '%';
+                    } else {
+                        document.getElementById('videoProgressFill').style.width = percent + '%';
+                    }
+                }
+            });
+            
+            xhr.addEventListener('load', () => {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    resolve(response.secure_url);
+                } else {
+                    reject(new Error('Upload failed'));
+                }
+            });
+            
+            xhr.addEventListener('error', () => reject(new Error('Upload failed')));
+        });
+
+        xhr.open('POST', url);
+        xhr.send(formData);
+        
+        return promise;
+    }
+
+    // Handle Image Upload
+    async function handleImageUpload(input) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('imagePreview').src = e.target.result;
+                document.getElementById('imagePreviewContainer').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+
+            // Show progress
+            document.getElementById('imageProgress').classList.remove('hidden');
+
+            try {
+                uploadedImageUrl = await uploadToCloudinary(file, 'image');
+                document.getElementById('imageProgress').classList.add('hidden');
+            } catch (error) {
+                alert('Error uploading image: ' + error.message);
+                document.getElementById('imageProgress').classList.add('hidden');
+            }
+        }
+    }
+
+    // Handle Video Upload
+    async function handleVideoUpload(input) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('videoPreview').src = e.target.result;
+                document.getElementById('videoPreviewContainer').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+
+            // Show progress
+            document.getElementById('videoProgress').classList.remove('hidden');
+
+            try {
+                uploadedVideoUrl = await uploadToCloudinary(file, 'video');
+                document.getElementById('videoProgress').classList.add('hidden');
+            } catch (error) {
+                alert('Error uploading video: ' + error.message);
+                document.getElementById('videoProgress').classList.add('hidden');
+            }
+        }
+    }
+
+    function removeImage() {
+        uploadedImageUrl = '';
+        document.getElementById('adImage').value = '';
+        document.getElementById('imagePreviewContainer').classList.add('hidden');
+    }
+
+    function removeVideo() {
+        uploadedVideoUrl = '';
+        document.getElementById('adVideo').value = '';
+        document.getElementById('videoPreviewContainer').classList.add('hidden');
+    }
+
+    // Post Ad
     document.getElementById('postAdForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // Ensure user data is loaded
         if (!currentUserData) {
             try {
                 const userDoc = await db.collection('users').doc(currentUser.uid).get();
@@ -504,7 +629,6 @@
         successDiv.style.display = 'none';
 
         try {
-            const imageUrl = document.getElementById('adImageUrl').value.trim();
             const sellerName = currentUserData && currentUserData.fullName ? currentUserData.fullName : currentUser.email.split('@')[0];
 
             await db.collection('products').add({
@@ -515,7 +639,8 @@
                 location: document.getElementById('adLocation').value.trim(),
                 phone: document.getElementById('adPhone').value.trim(),
                 quantity: document.getElementById('adQuantity').value.trim(),
-                imageUrl: imageUrl || '',
+                imageUrl: uploadedImageUrl || '',
+                videoUrl: uploadedVideoUrl || '',
                 sellerId: currentUser.uid,
                 sellerName: sellerName,
                 sellerEmail: currentUser.email,
@@ -525,7 +650,10 @@
 
             successDiv.style.display = 'flex';
             this.reset();
+            uploadedImageUrl = '';
+            uploadedVideoUrl = '';
             document.getElementById('imagePreviewContainer').classList.add('hidden');
+            document.getElementById('videoPreviewContainer').classList.add('hidden');
             
             setTimeout(() => {
                 showTab('myads');
@@ -574,7 +702,6 @@
         let products = [];
         snapshot.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
 
-        // Apply client-side filters
         if (filters.location) {
             products = products.filter(p => p.location && p.location.toLowerCase().includes(filters.location.toLowerCase()));
         }
@@ -602,20 +729,26 @@
         };
         const icon = categoryIcons[product.category] || 'ri-shopping-bag-line';
 
-        return `
-            <div class="product-card">
-                ${product.imageUrl 
-                    ? `<img src="${product.imageUrl}" alt="${product.title}" class="product-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        let mediaHtml = '';
+        if (product.videoUrl) {
+            mediaHtml = `<video src="${product.videoUrl}" class="product-video" controls></video>`;
+        } else if (product.imageUrl) {
+            mediaHtml = `<img src="${product.imageUrl}" alt="${product.title}" class="product-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                        <div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative hidden">
                         <i class="${icon} text-7xl text-white/50"></i>
-                       </div>`
-                    : `<div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative">
+                       </div>`;
+        } else {
+            mediaHtml = `<div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative">
                         <i class="${icon} text-7xl text-white/50"></i>
                         <span class="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold text-green-800">
                             ${product.category}
                         </span>
-                    </div>`
-                }
+                    </div>`;
+        }
+
+        return `
+            <div class="product-card">
+                ${mediaHtml}
                 <div class="p-4">
                     <h3 class="font-bold text-lg text-gray-800 mb-1">${product.title}</h3>
                     <p class="text-green-600 font-bold text-xl mb-2">${product.price.toLocaleString()} ETB</p>
