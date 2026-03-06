@@ -21,7 +21,7 @@
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(22,163,74,0.4); }
         .product-card { background: white; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; transition: all 0.3s; }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .loading-spinner { border: 3px solid #f3f3f3; border-top: 3px solid #16a34a; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; display: inline-block; }
+        .loading-spinner { border: 3px solid #f3f3f3; border-top: 3px solid #16a34a; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 2rem auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none !important; }
         .fade-in { animation: fadeIn 0.4s ease-out; }
@@ -31,9 +31,9 @@
         .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
         .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
         .category-card { background: linear-gradient(135deg, #86efac 0%, #4ade80 100%); transition: all 0.3s; }
-        .category-card:hover { transform: scale(1.05); }
+        .category-card:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
         input, select, textarea { transition: all 0.3s; }
-        input:focus, select:focus, textarea:focus { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.1); }
+        input:focus, select:focus, textarea:focus { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.1); outline: none; }
         .product-image { width: 100%; height: 250px; object-fit: cover; }
         .product-video { width: 100%; height: 250px; object-fit: cover; }
         .upload-area { border: 2px dashed #16a34a; border-radius: 0.5rem; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; background: #f0fdf4; }
@@ -41,6 +41,11 @@
         .upload-preview { max-width: 100%; max-height: 200px; border-radius: 0.5rem; margin-top: 1rem; }
         .progress-bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, #16a34a, #15803d); transition: width 0.3s; }
+        .phone-badge { background: #16a34a; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
+        .whatsapp-btn { background: #25D366; color: white; }
+        .whatsapp-btn:hover { background: #128C7E; }
+        .stat-card { background: white; border-radius: 1rem; padding: 1.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .filter-box { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; }
     </style>
 </head>
 <body>
@@ -58,7 +63,7 @@
                 <p class="text-gray-600">Buy & Sell Agricultural Products Directly from Farmers</p>
             </div>
 
-            <div id="authError" class="alert alert-error"><i class="ri-error-warning-fill"></i> <span id="errorText"></span></div>
+            <div id="authError" class="alert alert-error" style="display: flex;"><i class="ri-error-warning-fill"></i> <span id="errorText"></span></div>
 
             <!-- Registration Form -->
             <form id="registerForm" class="space-y-4">
@@ -146,7 +151,7 @@
         <!-- Categories -->
         <div class="mb-8">
             <h3 class="text-2xl font-bold text-gray-800 mb-4">Browse Categories</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 <div onclick="filterCategory('Crops')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
                     <i class="ri-seedling-line text-4xl text-green-800 mb-2"></i>
                     <p class="font-semibold text-green-900">Crops</p>
@@ -180,29 +185,29 @@
                 <h3 class="text-2xl font-bold text-gray-800">Latest Products</h3>
                 <button onclick="showTab('products')" class="text-green-600 hover:text-green-500 font-medium">View All →</button>
             </div>
-            <div id="recentProducts" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <div class="flex justify-center py-10"><div class="loading-spinner"></div></div>
+            <div id="recentProducts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="loading-spinner"></div>
             </div>
         </div>
 
         <!-- Stats -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div class="glass-panel p-6 text-center">
+            <div class="stat-card">
                 <i class="ri-shopping-bag-3-line text-4xl text-green-600 mb-2"></i>
                 <p class="text-3xl font-bold text-gray-800" id="totalProducts">0</p>
                 <p class="text-gray-600">Active Listings</p>
             </div>
-            <div class="glass-panel p-6 text-center">
+            <div class="stat-card">
                 <i class="ri-user-line text-4xl text-green-600 mb-2"></i>
                 <p class="text-3xl font-bold text-gray-800" id="totalFarmers">0</p>
                 <p class="text-gray-600">Registered Farmers</p>
             </div>
-            <div class="glass-panel p-6 text-center">
+            <div class="stat-card">
                 <i class="ri-map-pin-line text-4xl text-green-600 mb-2"></i>
                 <p class="text-3xl font-bold text-gray-800" id="totalRegions">0</p>
                 <p class="text-gray-600">Regions Covered</p>
             </div>
-            <div class="glass-panel p-6 text-center">
+            <div class="stat-card">
                 <i class="ri-handshake-line text-4xl text-green-600 mb-2"></i>
                 <p class="text-3xl font-bold text-gray-800">100%</p>
                 <p class="text-gray-600">Verified Sellers</p>
@@ -214,7 +219,7 @@
     <div id="productsTab" class="hidden max-w-7xl mx-auto p-6">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             <!-- Search Box -->
-            <div class="bg-green-700 text-white rounded-xl p-6 h-fit">
+            <div class="filter-box rounded-xl p-6 h-fit">
                 <h3 class="text-xl font-bold mb-4"><i class="ri-filter-line"></i> Filters</h3>
                 
                 <div class="space-y-4">
@@ -255,7 +260,7 @@
             <div class="lg:col-span-3">
                 <h3 class="text-2xl font-bold text-gray-800 mb-4">All Products</h3>
                 <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="flex justify-center py-10"><div class="loading-spinner"></div></div>
+                    <div class="loading-spinner"></div>
                 </div>
             </div>
         </div>
@@ -266,7 +271,7 @@
         <div class="glass-panel p-8">
             <h3 class="text-2xl font-bold text-gray-800 mb-6"><i class="ri-add-circle-line"></i> Post New Ad</h3>
             
-            <div id="postSuccess" class="alert alert-success" style="display: none;"><i class="ri-checkbox-circle-fill"></i> <span>Ad posted successfully!</span></div>
+            <div id="postSuccess" class="alert alert-success"><i class="ri-checkbox-circle-fill"></i> <span>Ad posted successfully!</span></div>
             <div id="postError" class="alert alert-error"><i class="ri-error-warning-fill"></i> <span id="postErrorText"></span></div>
 
             <form id="postAdForm" class="space-y-4">
@@ -365,9 +370,7 @@
     <div id="myadsTab" class="hidden max-w-7xl mx-auto p-6">
         <h3 class="text-2xl font-bold text-gray-800 mb-6">My Advertisements</h3>
         <div id="myAdsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="flex justify-center py-10 col-span-3">
-                <div class="loading-spinner"></div>
-            </div>
+            <div class="loading-spinner"></div>
         </div>
     </div>
 </div>
@@ -392,6 +395,17 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
+    
+    // Enable offline persistence
+    db.enablePersistence()
+        .catch((err) => {
+            if (err.code == 'failed-precondition') {
+                console.log('Multiple tabs open, persistence can only be enabled in one tab at a time.');
+            } else if (err.code == 'unimplemented') {
+                console.log('The current browser does not support persistence.');
+            }
+        });
+    
     let currentUser = null;
     let currentUserData = null;
     let uploadedImageUrl = '';
@@ -409,13 +423,14 @@
                     currentUserData = {
                         fullName: user.email.split('@')[0],
                         email: user.email,
-                        uid: user.uid
+                        uid: user.uid,
+                        phone: ''
                     };
                     await db.collection('users').doc(user.uid).set(currentUserData);
                 }
             } catch (error) {
                 console.error('Error loading user data:', error);
-                currentUserData = { fullName: user.email.split('@')[0], email: user.email };
+                currentUserData = { fullName: user.email.split('@')[0], email: user.email, phone: '' };
             }
             document.getElementById('authSection').classList.add('hidden');
             document.getElementById('dashboardSection').classList.remove('hidden');
@@ -628,6 +643,7 @@
 
         try {
             const sellerName = currentUserData && currentUserData.fullName ? currentUserData.fullName : currentUser.email.split('@')[0];
+            const sellerPhone = document.getElementById('adPhone').value.trim();
 
             await db.collection('products').add({
                 title: document.getElementById('adTitle').value.trim(),
@@ -635,7 +651,7 @@
                 price: parseFloat(document.getElementById('adPrice').value),
                 description: document.getElementById('adDescription').value.trim(),
                 location: document.getElementById('adLocation').value.trim(),
-                phone: document.getElementById('adPhone').value.trim(),
+                phone: sellerPhone,
                 quantity: document.getElementById('adQuantity').value.trim(),
                 imageUrl: uploadedImageUrl || '',
                 videoUrl: uploadedVideoUrl || '',
@@ -669,93 +685,87 @@
         }
     });
 
-    // Load Recent Products
+    // Load Recent Products - FIXED
     async function loadRecentProducts() {
-        const snapshot = await db.collection('products')
-            .where('status', '==', 'active')
-            .orderBy('createdAt', 'desc')
-            .limit(8)
-            .get();
-        
-        const products = [];
-        snapshot.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
-
         const container = document.getElementById('recentProducts');
-        if (products.length === 0) {
-            container.innerHTML = '<p class="text-gray-500 col-span-4 text-center py-10">No products yet. Be the first to post!</p>';
-            return;
-        }
-
-        container.innerHTML = products.map(product => createProductCard(product)).join('');
-    }
-
-    // Load All Products
-    async function loadProducts(filters = {}) {
-        let query = db.collection('products').where('status', '==', 'active');
         
-        if (filters.category) query = query.where('category', '==', filters.category);
-        query = query.orderBy('createdAt', 'desc');
-
-        const snapshot = await query.get();
-        let products = [];
-        snapshot.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
-
-        if (filters.location) {
-            products = products.filter(p => p.location && p.location.toLowerCase().includes(filters.location.toLowerCase()));
-        }
-        if (filters.maxPrice) {
-            products = products.filter(p => p.price <= filters.maxPrice);
-        }
-
-        const container = document.getElementById('productsGrid');
-        if (products.length === 0) {
-            container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">No products found</p>';
-            return;
-        }
-
-        container.innerHTML = products.map(product => createProductCard(product)).join('');
-    }
-
-    // FIXED: Load My Ads
-    async function loadMyAds() {
-        const container = document.getElementById('myAdsGrid');
-        
-        if (!currentUser) {
-            container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">Please login to view your ads.</p>';
-            return;
-        }
-
         try {
-            console.log('Loading ads for user:', currentUser.uid);
-            
-            // Get all products and filter client-side
+            console.log('Loading recent products...');
             const snapshot = await db.collection('products')
-                .where('sellerId', '==', currentUser.uid)
+                .where('status', '==', 'active')
+                .orderBy('createdAt', 'desc')
+                .limit(8)
                 .get();
             
-            console.log('Found', snapshot.size, 'ads');
+            console.log('Found', snapshot.size, 'recent products');
             
             const products = [];
             snapshot.forEach(doc => {
                 const data = doc.data();
-                console.log('Ad:', data.title, data.sellerId);
+                console.log('Product:', data.title);
                 products.push({ id: doc.id, ...data });
             });
 
             if (products.length === 0) {
-                container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">You haven\'t posted any ads yet. <button onclick="showTab(\'post\')" class="text-green-600 font-medium">Post your first ad!</button></p>';
+                container.innerHTML = '<p class="text-gray-500 col-span-4 text-center py-10">No products yet. Be the first to post!</p>';
+                return;
+            }
+
+            container.innerHTML = products.map(product => createProductCard(product, true)).join('');
+            
+        } catch (error) {
+            console.error('Error loading recent products:', error);
+            container.innerHTML = '<p class="text-red-500 col-span-4 text-center py-10">Error loading products: ' + error.message + '</p>';
+        }
+    }
+
+    // Load All Products - FIXED
+    async function loadProducts(filters = {}) {
+        const container = document.getElementById('productsGrid');
+        
+        try {
+            console.log('Loading products with filters:', filters);
+            
+            let query = db.collection('products').where('status', '==', 'active');
+            
+            if (filters.category) {
+                query = query.where('category', '==', filters.category);
+            }
+            
+            query = query.orderBy('createdAt', 'desc');
+            const snapshot = await query.get();
+            
+            console.log('Found', snapshot.size, 'products');
+            
+            let products = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                products.push({ id: doc.id, ...data });
+            });
+
+            // Apply client-side filters
+            if (filters.location) {
+                products = products.filter(p => p.location && p.location.toLowerCase().includes(filters.location.toLowerCase()));
+            }
+            if (filters.maxPrice) {
+                products = products.filter(p => p.price <= filters.maxPrice);
+            }
+
+            if (products.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">No products found matching your criteria</p>';
                 return;
             }
 
             container.innerHTML = products.map(product => createProductCard(product)).join('');
             
         } catch (error) {
-            console.error('Error loading my ads:', error);
-            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading ads: ' + error.message + '<br><button onclick="loadMyAds()" class="mt-2 px-4 py-2 bg-green-600 text-white rounded">Retry</button></p>';
+            console.error('Error loading products:', error);
+            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading products: ' + error.message + '<br><button onclick="loadProducts()" class="mt-2 px-4 py-2 bg-green-600 text-white rounded">Retry</button></p>';
         }
     }
 
-    function createProductCard(product) {
+    // Create Product Card with Phone Number
+    function createProductCard(product, isCompact = false) {
         const categoryIcons = {
             'Crops': 'ri-seedling-line',
             'Livestock': 'ri-paw-print-line',
@@ -783,8 +793,10 @@
                     </div>`;
         }
 
+        const compactClass = isCompact ? '' : '';
+
         return `
-            <div class="product-card">
+            <div class="product-card ${compactClass}">
                 ${mediaHtml}
                 <div class="p-4">
                     <h3 class="font-bold text-lg text-gray-800 mb-1">${product.title}</h3>
@@ -792,15 +804,23 @@
                     <p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>
                     ${product.quantity ? `<p class="text-gray-500 text-xs mb-2"><i class="ri-weight-line"></i> ${product.quantity}</p>` : ''}
                     <p class="text-gray-500 text-xs mb-3"><i class="ri-map-pin-line"></i> ${product.location}</p>
-                    <div class="flex gap-2">
-                        <a href="tel:${product.phone}" class="flex-1 bg-green-600 text-white py-2 rounded-lg text-center font-medium hover:bg-green-700 transition">
-                            <i class="ri-phone-line"></i> Call
-                        </a>
-                        <a href="https://wa.me/${product.phone.replace('+', '').replace(/\s/g, '')}" target="_blank" class="flex-1 bg-emerald-600 text-white py-2 rounded-lg text-center font-medium hover:bg-emerald-700 transition">
-                            <i class="ri-whatsapp-line"></i> WhatsApp
-                        </a>
+                    
+                    <!-- Seller Info with Phone -->
+                    <div class="mb-3 p-3 bg-gray-50 rounded-lg">
+                        <p class="text-sm font-medium text-gray-700 mb-1"><i class="ri-user-line"></i> ${product.sellerName || 'Seller'}</p>
+                        ${product.phone ? `<span class="phone-badge"><i class="ri-phone-line"></i> ${product.phone}</span>` : ''}
                     </div>
-                    <p class="text-xs text-gray-500 mt-2 text-center">Seller: ${product.sellerName || 'Unknown'}</p>
+                    
+                    <div class="flex gap-2">
+                        ${product.phone ? `
+                            <a href="tel:${product.phone}" class="flex-1 bg-green-600 text-white py-2 rounded-lg text-center font-medium hover:bg-green-700 transition">
+                                <i class="ri-phone-line"></i> Call
+                            </a>
+                            <a href="https://wa.me/${product.phone.replace('+', '').replace(/\s/g, '')}" target="_blank" class="flex-1 whatsapp-btn py-2 rounded-lg text-center font-medium transition">
+                                <i class="ri-whatsapp-line"></i> WhatsApp
+                            </a>
+                        ` : '<p class="text-xs text-gray-500 w-full text-center">Contact info not provided</p>'}
+                    </div>
                 </div>
             </div>
         `;
@@ -813,6 +833,7 @@
             location: document.getElementById('searchLocation').value,
             maxPrice: parseFloat(document.getElementById('searchMaxPrice').value) || null
         };
+        console.log('Applying search filters:', filters);
         loadProducts(filters);
         showTab('products');
     }
@@ -827,6 +848,45 @@
     function filterCategory(category) {
         document.getElementById('searchCategory').value = category;
         applySearch();
+    }
+
+    // Load My Ads - FIXED
+    async function loadMyAds() {
+        const container = document.getElementById('myAdsGrid');
+        
+        if (!currentUser) {
+            container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">Please login to view your ads.</p>';
+            return;
+        }
+
+        try {
+            console.log('Loading ads for user:', currentUser.uid);
+            
+            const snapshot = await db.collection('products')
+                .where('sellerId', '==', currentUser.uid)
+                .orderBy('createdAt', 'desc')
+                .get();
+            
+            console.log('Found', snapshot.size, 'ads for this user');
+            
+            const products = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                console.log('My Ad:', data.title);
+                products.push({ id: doc.id, ...data });
+            });
+
+            if (products.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">You haven\'t posted any ads yet. <button onclick="showTab(\'post\')" class="text-green-600 font-medium">Post your first ad!</button></p>';
+                return;
+            }
+
+            container.innerHTML = products.map(product => createProductCard(product)).join('');
+            
+        } catch (error) {
+            console.error('Error loading my ads:', error);
+            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading ads: ' + error.message + '<br><button onclick="loadMyAds()" class="mt-2 px-4 py-2 bg-green-600 text-white rounded">Retry</button></p>';
+        }
     }
 
     // Load Stats
@@ -856,13 +916,28 @@
             document.getElementById(t + 'Tab').classList.toggle('hidden', t !== tab);
         });
         
-        if (tab === 'products') loadProducts();
-        if (tab === 'myads') loadMyAds();
+        if (tab === 'products') {
+            loadProducts();
+        } else if (tab === 'myads') {
+            loadMyAds();
+        } else if (tab === 'home') {
+            loadRecentProducts();
+            loadStats();
+        }
     }
 
     function logout() {
         auth.signOut();
     }
+
+    // Debug function
+    window.debugProducts = async function() {
+        const snapshot = await db.collection('products').get();
+        console.log('Total products:', snapshot.size);
+        snapshot.forEach(doc => {
+            console.log('Product:', doc.id, doc.data());
+        });
+    };
 </script>
 
 </body>
