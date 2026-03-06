@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriMarket Ethiopia - Buy & Sell Agricultural Products</title>
+    <title>EngiMarket Ethiopia - Buy & Sell Engineering Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.16/index.css" rel="stylesheet">
@@ -15,52 +15,53 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f0fdf4; min-height: 100vh; }
+        body { font-family: 'Inter', sans-serif; background: #f0f9ff; min-height: 100vh; }
         .glass-panel { background: rgba(255,255,255,0.98); backdrop-filter: blur(20px); border-radius: 1rem; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-        .btn-primary { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); transition: all 0.3s; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(22,163,74,0.4); }
+        .btn-primary { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); transition: all 0.3s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(2,132,199,0.4); }
         .product-card { background: white; border-radius: 0.75rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; transition: all 0.3s; }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .loading-spinner { border: 3px solid #f3f3f3; border-top: 3px solid #16a34a; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 2rem auto; }
+        .loading-spinner { border: 3px solid #f3f3f3; border-top: 3px solid #0284c7; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 2rem auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none !important; }
         .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .nav-bar { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); }
+        .nav-bar { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); }
         .alert { padding: 0.75rem 1rem; border-radius: 0.5rem; margin-bottom: 1rem; display: none; }
         .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
         .alert-success { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
-        .category-card { background: linear-gradient(135deg, #86efac 0%, #4ade80 100%); transition: all 0.3s; }
+        .category-card { background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%); transition: all 0.3s; }
         .category-card:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
         input, select, textarea { transition: all 0.3s; }
-        input:focus, select:focus, textarea:focus { border-color: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.1); outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2,132,199,0.1); outline: none; }
         .product-image { width: 100%; height: 250px; object-fit: cover; }
         .product-video { width: 100%; height: 250px; object-fit: cover; }
-        .upload-area { border: 2px dashed #16a34a; border-radius: 0.5rem; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; background: #f0fdf4; }
-        .upload-area:hover { background: #dcfce7; border-color: #15803d; }
+        .upload-area { border: 2px dashed #0284c7; border-radius: 0.5rem; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; background: #f0f9ff; }
+        .upload-area:hover { background: #e0f2fe; border-color: #0369a1; }
         .upload-preview { max-width: 100%; max-height: 200px; border-radius: 0.5rem; margin-top: 1rem; }
         .progress-bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden; margin-top: 0.5rem; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #16a34a, #15803d); transition: width 0.3s; }
-        .phone-badge { background: #16a34a; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #0284c7, #0369a1); transition: width 0.3s; }
+        .phone-badge { background: #0284c7; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; }
         .whatsapp-btn { background: #25D366; color: white; }
         .whatsapp-btn:hover { background: #128C7E; }
         .stat-card { background: white; border-radius: 1rem; padding: 1.5rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .filter-box { background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color: white; }
+        .filter-box { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; }
+        .verified-badge { background: #10b981; color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.75rem; }
     </style>
 </head>
 <body>
 
 <!-- AUTH SECTION -->
-<div id="authSection" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-green-50 to-emerald-50">
+<div id="authSection" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-sky-50 to-blue-50">
     <div class="glass-panel w-full max-w-2xl fade-in">
-        <div class="h-2 bg-gradient-to-r from-green-600 via-green-500 to-emerald-500"></div>
+        <div class="h-2 bg-gradient-to-r from-sky-600 via-blue-500 to-cyan-500"></div>
         <div class="p-8">
             <div class="text-center mb-8">
-                <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-600 to-emerald-500 rounded-full mb-4 shadow-lg">
-                    <i class="ri-store-2-line text-4xl text-white"></i>
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-sky-600 to-blue-500 rounded-full mb-4 shadow-lg">
+                    <i class="ri-engine-line text-4xl text-white"></i>
                 </div>
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">AgriMarket Ethiopia</h1>
-                <p class="text-gray-600">Buy & Sell Agricultural Products Directly from Farmers</p>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">EngiMarket Ethiopia</h1>
+                <p class="text-gray-600">Buy & Sell Engineering Products & Equipment</p>
             </div>
 
             <div id="authError" class="alert alert-error" style="display: flex;"><i class="ri-error-warning-fill"></i> <span id="errorText"></span></div>
@@ -68,7 +69,7 @@
             <!-- Registration Form -->
             <form id="registerForm" class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <input type="text" id="regName" required placeholder="Full Name / Farm Name *" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
+                    <input type="text" id="regName" required placeholder="Full Name / Company Name *" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
                     <input type="email" id="regEmail" required placeholder="Email Address *" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
                 </div>
                 
@@ -79,10 +80,11 @@
 
                 <select id="regType" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
                     <option value="">I am a... *</option>
-                    <option value="Farmer">Farmer</option>
+                    <option value="Supplier">Engineering Supplier</option>
+                    <option value="Contractor">Contractor</option>
+                    <option value="Manufacturer">Manufacturer</option>
                     <option value="Buyer">Buyer</option>
-                    <option value="Both">Both (Farmer & Buyer)</option>
-                    <option value="Supplier">Agricultural Supplier</option>
+                    <option value="Both">Both (Supplier & Buyer)</option>
                 </select>
 
                 <input type="password" id="regPassword" required minlength="6" placeholder="Password (min 6 characters) *" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
@@ -90,7 +92,7 @@
 
                 <div class="flex items-center gap-2">
                     <input type="checkbox" id="regTerms" required class="w-4 h-4">
-                    <label for="regTerms" class="text-sm text-gray-600">I agree to <a href="#" class="text-green-600 font-medium">Terms & Conditions</a></label>
+                    <label for="regTerms" class="text-sm text-gray-600">I agree to <a href="#" class="text-sky-600 font-medium">Terms & Conditions</a></label>
                 </div>
 
                 <button type="submit" id="regBtn" class="btn-primary w-full text-white font-semibold py-3 rounded-lg shadow-lg">
@@ -111,7 +113,7 @@
             <div class="mt-6 pt-6 border-t border-gray-200 text-center">
                 <p class="text-sm text-gray-600">
                     <span id="authToggleText">Already have an account?</span>
-                    <button onclick="toggleAuth()" class="text-green-600 hover:text-green-500 font-semibold" id="authToggleBtn">Sign In</button>
+                    <button onclick="toggleAuth()" class="text-sky-600 hover:text-sky-500 font-semibold" id="authToggleBtn">Sign In</button>
                 </p>
             </div>
         </div>
@@ -124,10 +126,10 @@
     <nav class="nav-bar text-white py-4 px-6 shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center flex-wrap gap-4">
             <div class="flex items-center gap-3">
-                <i class="ri-store-2-line text-3xl"></i>
+                <i class="ri-engine-line text-3xl"></i>
                 <div>
-                    <h1 class="font-bold text-xl">AgriMarket</h1>
-                    <p class="text-xs opacity-80">Agricultural Products Marketplace</p>
+                    <h1 class="font-bold text-xl">EngiMarket</h1>
+                    <p class="text-xs opacity-80">Engineering Products Marketplace</p>
                 </div>
             </div>
             <div class="flex items-center gap-2 flex-wrap">
@@ -143,38 +145,38 @@
     <!-- Home Tab -->
     <div id="homeTab" class="max-w-7xl mx-auto p-6">
         <!-- Welcome Banner -->
-        <div class="bg-gradient-to-r from-green-600 to-emerald-500 text-white rounded-2xl p-8 mb-8 shadow-lg">
-            <h2 class="text-3xl font-bold mb-2">🌾 Welcome to AgriMarket Ethiopia!</h2>
-            <p class="opacity-90">Buy and sell agricultural products directly from farmers. No middlemen!</p>
+        <div class="bg-gradient-to-r from-sky-600 to-blue-500 text-white rounded-2xl p-8 mb-8 shadow-lg">
+            <h2 class="text-3xl font-bold mb-2">⚙️ Welcome to EngiMarket Ethiopia!</h2>
+            <p class="opacity-90">Buy and sell engineering products, tools, and equipment directly from suppliers. Best prices in Ethiopia!</p>
         </div>
 
         <!-- Categories -->
         <div class="mb-8">
             <h3 class="text-2xl font-bold text-gray-800 mb-4">Browse Categories</h3>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                <div onclick="filterCategory('Crops')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
-                    <i class="ri-seedling-line text-4xl text-green-800 mb-2"></i>
-                    <p class="font-semibold text-green-900">Crops</p>
+                <div onclick="filterCategory('Tools')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
+                    <i class="ri-hammer-line text-4xl text-blue-900 mb-2"></i>
+                    <p class="font-semibold text-blue-900">Tools</p>
                 </div>
-                <div onclick="filterCategory('Livestock')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
-                    <i class="ri-paw-print-line text-4xl text-green-800 mb-2"></i>
-                    <p class="font-semibold text-green-900">Livestock</p>
+                <div onclick="filterCategory('Machinery')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
+                    <i class="ri-settings-4-line text-4xl text-blue-900 mb-2"></i>
+                    <p class="font-semibold text-blue-900">Machinery</p>
                 </div>
-                <div onclick="filterCategory('Equipment')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
-                    <i class="ri-tools-line text-4xl text-green-800 mb-2"></i>
-                    <p class="font-semibold text-green-900">Equipment</p>
+                <div onclick="filterCategory('Electronics')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
+                    <i class="ri-cpu-line text-4xl text-blue-900 mb-2"></i>
+                    <p class="font-semibold text-blue-900">Electronics</p>
                 </div>
-                <div onclick="filterCategory('Seeds')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
-                    <i class="ri-flower-line text-4xl text-green-800 mb-2"></i>
-                    <p class="font-semibold text-green-900">Seeds</p>
+                <div onclick="filterCategory('Construction')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
+                    <i class="ri-building-line text-4xl text-blue-900 mb-2"></i>
+                    <p class="font-semibold text-blue-900">Construction</p>
                 </div>
-                <div onclick="filterCategory('Fertilizers')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
-                    <i class="ri-flask-line text-4xl text-green-800 mb-2"></i>
-                    <p class="font-semibold text-green-900">Fertilizers</p>
+                <div onclick="filterCategory('Electrical')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
+                    <i class="ri-flashlight-line text-4xl text-blue-900 mb-2"></i>
+                    <p class="font-semibold text-blue-900">Electrical</p>
                 </div>
                 <div onclick="filterCategory('Other')" class="category-card p-6 rounded-xl text-center cursor-pointer shadow-lg">
-                    <i class="ri-more-2-line text-4xl text-green-800 mb-2"></i>
-                    <p class="font-semibold text-green-900">Other</p>
+                    <i class="ri-more-2-line text-4xl text-blue-900 mb-2"></i>
+                    <p class="font-semibold text-blue-900">Other</p>
                 </div>
             </div>
         </div>
@@ -183,7 +185,7 @@
         <div class="mb-8">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-2xl font-bold text-gray-800">Latest Products</h3>
-                <button onclick="showTab('products')" class="text-green-600 hover:text-green-500 font-medium">View All →</button>
+                <button onclick="showTab('products')" class="text-sky-600 hover:text-sky-500 font-medium">View All →</button>
             </div>
             <div id="recentProducts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="loading-spinner"></div>
@@ -193,22 +195,22 @@
         <!-- Stats -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div class="stat-card">
-                <i class="ri-shopping-bag-3-line text-4xl text-green-600 mb-2"></i>
+                <i class="ri-shopping-bag-3-line text-4xl text-sky-600 mb-2"></i>
                 <p class="text-3xl font-bold text-gray-800" id="totalProducts">0</p>
                 <p class="text-gray-600">Active Listings</p>
             </div>
             <div class="stat-card">
-                <i class="ri-user-line text-4xl text-green-600 mb-2"></i>
-                <p class="text-3xl font-bold text-gray-800" id="totalFarmers">0</p>
-                <p class="text-gray-600">Registered Farmers</p>
+                <i class="ri-user-line text-4xl text-sky-600 mb-2"></i>
+                <p class="text-3xl font-bold text-gray-800" id="totalSuppliers">0</p>
+                <p class="text-gray-600">Registered Suppliers</p>
             </div>
             <div class="stat-card">
-                <i class="ri-map-pin-line text-4xl text-green-600 mb-2"></i>
+                <i class="ri-map-pin-line text-4xl text-sky-600 mb-2"></i>
                 <p class="text-3xl font-bold text-gray-800" id="totalRegions">0</p>
                 <p class="text-gray-600">Regions Covered</p>
             </div>
             <div class="stat-card">
-                <i class="ri-handshake-line text-4xl text-green-600 mb-2"></i>
+                <i class="ri-verified-badge-line text-4xl text-sky-600 mb-2"></i>
                 <p class="text-3xl font-bold text-gray-800">100%</p>
                 <p class="text-gray-600">Verified Sellers</p>
             </div>
@@ -227,11 +229,11 @@
                         <label class="block text-sm mb-1">Category:</label>
                         <select id="searchCategory" class="w-full px-3 py-2 rounded-lg text-gray-800">
                             <option value="">All Categories</option>
-                            <option value="Crops">Crops</option>
-                            <option value="Livestock">Livestock</option>
-                            <option value="Equipment">Equipment</option>
-                            <option value="Seeds">Seeds</option>
-                            <option value="Fertilizers">Fertilizers</option>
+                            <option value="Tools">Tools</option>
+                            <option value="Machinery">Machinery</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Electrical">Electrical</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -277,7 +279,7 @@
             <form id="postAdForm" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Product Title *</label>
-                    <input type="text" id="adTitle" required placeholder="e.g., Fresh Tomatoes, Dairy Cow, Tractor" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
+                    <input type="text" id="adTitle" required placeholder="e.g., Electric Drill, Concrete Mixer, Generator" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -285,11 +287,11 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Category *</label>
                         <select id="adCategory" required class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
                             <option value="">Select Category</option>
-                            <option value="Crops">Crops</option>
-                            <option value="Livestock">Livestock</option>
-                            <option value="Equipment">Equipment</option>
-                            <option value="Seeds">Seeds</option>
-                            <option value="Fertilizers">Fertilizers</option>
+                            <option value="Tools">Tools</option>
+                            <option value="Machinery">Machinery</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Electrical">Electrical</option>
                             <option value="Other">Other</option>
                         </select>
                     </div>
@@ -301,14 +303,31 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Description *</label>
-                    <textarea id="adDescription" required rows="4" placeholder="Describe your product: quantity, quality, harvest date, etc." class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none"></textarea>
+                    <textarea id="adDescription" required rows="4" placeholder="Describe your product: specifications, brand, condition, warranty, etc." class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none"></textarea>
+                </div>
+
+                <!-- Specifications -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+                        <input type="text" id="adBrand" placeholder="e.g., Bosch, Makita, Caterpillar" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Condition</label>
+                        <select id="adCondition" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
+                            <option value="">Select Condition</option>
+                            <option value="New">New</option>
+                            <option value="Used">Used</option>
+                            <option value="Refurbished">Refurbished</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- Image Upload -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Product Photo</label>
                     <div class="upload-area" onclick="document.getElementById('adImage').click()">
-                        <i class="ri-image-add-line text-4xl text-green-600 mb-2"></i>
+                        <i class="ri-image-add-line text-4xl text-sky-600 mb-2"></i>
                         <p class="text-gray-700 font-medium">Click to upload image</p>
                         <p class="text-sm text-gray-500">or drag and drop (JPG, PNG - Max 10MB)</p>
                     </div>
@@ -327,7 +346,7 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Product Video (Optional)</label>
                     <div class="upload-area" onclick="document.getElementById('adVideo').click()">
-                        <i class="ri-video-add-line text-4xl text-green-600 mb-2"></i>
+                        <i class="ri-video-add-line text-4xl text-sky-600 mb-2"></i>
                         <p class="text-gray-700 font-medium">Click to upload video</p>
                         <p class="text-sm text-gray-500">MP4, WebM - Max 50MB</p>
                     </div>
@@ -355,8 +374,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Quantity/Unit</label>
-                    <input type="text" id="adQuantity" placeholder="e.g., 100 kg, 5 cows, 1 piece" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Quantity Available</label>
+                    <input type="text" id="adQuantity" placeholder="e.g., 50 pieces, 10 units, 1 set" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none">
                 </div>
 
                 <button type="submit" id="postBtn" class="btn-primary w-full text-white font-semibold py-3 rounded-lg shadow-lg">
@@ -395,16 +414,6 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
-    
-    // Enable offline persistence
-    db.enablePersistence()
-        .catch((err) => {
-            if (err.code == 'failed-precondition') {
-                console.log('Multiple tabs open, persistence can only be enabled in one tab at a time.');
-            } else if (err.code == 'unimplemented') {
-                console.log('The current browser does not support persistence.');
-            }
-        });
     
     let currentUser = null;
     let currentUserData = null;
@@ -650,6 +659,8 @@
                 category: document.getElementById('adCategory').value,
                 price: parseFloat(document.getElementById('adPrice').value),
                 description: document.getElementById('adDescription').value.trim(),
+                brand: document.getElementById('adBrand').value.trim(),
+                condition: document.getElementById('adCondition').value,
                 location: document.getElementById('adLocation').value.trim(),
                 phone: sellerPhone,
                 quantity: document.getElementById('adQuantity').value.trim(),
@@ -685,16 +696,15 @@
         }
     });
 
-    // Load Recent Products - FIXED
+    // Load Recent Products - NO INDEX REQUIRED
     async function loadRecentProducts() {
         const container = document.getElementById('recentProducts');
         
         try {
             console.log('Loading recent products...');
+            
             const snapshot = await db.collection('products')
                 .where('status', '==', 'active')
-                .orderBy('createdAt', 'desc')
-                .limit(8)
                 .get();
             
             console.log('Found', snapshot.size, 'recent products');
@@ -702,16 +712,25 @@
             const products = [];
             snapshot.forEach(doc => {
                 const data = doc.data();
-                console.log('Product:', data.title);
                 products.push({ id: doc.id, ...data });
             });
 
-            if (products.length === 0) {
+            // Sort client-side by createdAt (newest first)
+            products.sort((a, b) => {
+                const timeA = a.createdAt?.seconds || 0;
+                const timeB = b.createdAt?.seconds || 0;
+                return timeB - timeA;
+            });
+
+            // Get only first 8
+            const recentProducts = products.slice(0, 8);
+
+            if (recentProducts.length === 0) {
                 container.innerHTML = '<p class="text-gray-500 col-span-4 text-center py-10">No products yet. Be the first to post!</p>';
                 return;
             }
 
-            container.innerHTML = products.map(product => createProductCard(product, true)).join('');
+            container.innerHTML = recentProducts.map(product => createProductCard(product, true)).join('');
             
         } catch (error) {
             console.error('Error loading recent products:', error);
@@ -719,7 +738,7 @@
         }
     }
 
-    // Load All Products - FIXED
+    // Load All Products - NO INDEX REQUIRED
     async function loadProducts(filters = {}) {
         const container = document.getElementById('productsGrid');
         
@@ -728,11 +747,6 @@
             
             let query = db.collection('products').where('status', '==', 'active');
             
-            if (filters.category) {
-                query = query.where('category', '==', filters.category);
-            }
-            
-            query = query.orderBy('createdAt', 'desc');
             const snapshot = await query.get();
             
             console.log('Found', snapshot.size, 'products');
@@ -743,13 +757,23 @@
                 products.push({ id: doc.id, ...data });
             });
 
-            // Apply client-side filters
+            // Apply filters client-side
+            if (filters.category) {
+                products = products.filter(p => p.category === filters.category);
+            }
             if (filters.location) {
                 products = products.filter(p => p.location && p.location.toLowerCase().includes(filters.location.toLowerCase()));
             }
             if (filters.maxPrice) {
                 products = products.filter(p => p.price <= filters.maxPrice);
             }
+
+            // Sort client-side by createdAt (newest first)
+            products.sort((a, b) => {
+                const timeA = a.createdAt?.seconds || 0;
+                const timeB = b.createdAt?.seconds || 0;
+                return timeB - timeA;
+            });
 
             if (products.length === 0) {
                 container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">No products found matching your criteria</p>';
@@ -760,18 +784,18 @@
             
         } catch (error) {
             console.error('Error loading products:', error);
-            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading products: ' + error.message + '<br><button onclick="loadProducts()" class="mt-2 px-4 py-2 bg-green-600 text-white rounded">Retry</button></p>';
+            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading products: ' + error.message + '<br><button onclick="loadProducts()" class="mt-2 px-4 py-2 bg-sky-600 text-white rounded">Retry</button></p>';
         }
     }
 
     // Create Product Card with Phone Number
     function createProductCard(product, isCompact = false) {
         const categoryIcons = {
-            'Crops': 'ri-seedling-line',
-            'Livestock': 'ri-paw-print-line',
-            'Equipment': 'ri-tools-line',
-            'Seeds': 'ri-flower-line',
-            'Fertilizers': 'ri-flask-line',
+            'Tools': 'ri-hammer-line',
+            'Machinery': 'ri-settings-4-line',
+            'Electronics': 'ri-cpu-line',
+            'Construction': 'ri-building-line',
+            'Electrical': 'ri-flashlight-line',
             'Other': 'ri-more-2-line'
         };
         const icon = categoryIcons[product.category] || 'ri-shopping-bag-line';
@@ -781,13 +805,13 @@
             mediaHtml = `<video src="${product.videoUrl}" class="product-video" controls></video>`;
         } else if (product.imageUrl) {
             mediaHtml = `<img src="${product.imageUrl}" alt="${product.title}" class="product-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                       <div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative hidden">
+                       <div class="h-60 bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center relative hidden">
                         <i class="${icon} text-7xl text-white/50"></i>
                        </div>`;
         } else {
-            mediaHtml = `<div class="h-60 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center relative">
+            mediaHtml = `<div class="h-60 bg-gradient-to-br from-sky-400 to-blue-500 flex items-center justify-center relative">
                         <i class="${icon} text-7xl text-white/50"></i>
-                        <span class="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold text-green-800">
+                        <span class="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full text-xs font-semibold text-blue-800">
                             ${product.category}
                         </span>
                     </div>`;
@@ -800,9 +824,11 @@
                 ${mediaHtml}
                 <div class="p-4">
                     <h3 class="font-bold text-lg text-gray-800 mb-1">${product.title}</h3>
-                    <p class="text-green-600 font-bold text-xl mb-2">${product.price.toLocaleString()} ETB</p>
+                    <p class="text-sky-600 font-bold text-xl mb-2">${product.price.toLocaleString()} ETB</p>
+                    ${product.brand ? `<p class="text-gray-600 text-sm mb-1"><i class="ri-store-line"></i> Brand: ${product.brand}</p>` : ''}
+                    ${product.condition ? `<p class="text-gray-600 text-sm mb-1"><i class="ri-checkbox-circle-line"></i> Condition: ${product.condition}</p>` : ''}
                     <p class="text-gray-600 text-sm mb-3 line-clamp-2">${product.description}</p>
-                    ${product.quantity ? `<p class="text-gray-500 text-xs mb-2"><i class="ri-weight-line"></i> ${product.quantity}</p>` : ''}
+                    ${product.quantity ? `<p class="text-gray-500 text-xs mb-2"><i class="ri-stack-line"></i> ${product.quantity}</p>` : ''}
                     <p class="text-gray-500 text-xs mb-3"><i class="ri-map-pin-line"></i> ${product.location}</p>
                     
                     <!-- Seller Info with Phone -->
@@ -813,7 +839,7 @@
                     
                     <div class="flex gap-2">
                         ${product.phone ? `
-                            <a href="tel:${product.phone}" class="flex-1 bg-green-600 text-white py-2 rounded-lg text-center font-medium hover:bg-green-700 transition">
+                            <a href="tel:${product.phone}" class="flex-1 bg-sky-600 text-white py-2 rounded-lg text-center font-medium hover:bg-sky-700 transition">
                                 <i class="ri-phone-line"></i> Call
                             </a>
                             <a href="https://wa.me/${product.phone.replace('+', '').replace(/\s/g, '')}" target="_blank" class="flex-1 whatsapp-btn py-2 rounded-lg text-center font-medium transition">
@@ -850,7 +876,7 @@
         applySearch();
     }
 
-    // Load My Ads - FIXED
+    // Load My Ads
     async function loadMyAds() {
         const container = document.getElementById('myAdsGrid');
         
@@ -864,7 +890,6 @@
             
             const snapshot = await db.collection('products')
                 .where('sellerId', '==', currentUser.uid)
-                .orderBy('createdAt', 'desc')
                 .get();
             
             console.log('Found', snapshot.size, 'ads for this user');
@@ -876,8 +901,15 @@
                 products.push({ id: doc.id, ...data });
             });
 
+            // Sort by createdAt (newest first)
+            products.sort((a, b) => {
+                const timeA = a.createdAt?.seconds || 0;
+                const timeB = b.createdAt?.seconds || 0;
+                return timeB - timeA;
+            });
+
             if (products.length === 0) {
-                container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">You haven\'t posted any ads yet. <button onclick="showTab(\'post\')" class="text-green-600 font-medium">Post your first ad!</button></p>';
+                container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">You haven\'t posted any ads yet. <button onclick="showTab(\'post\')" class="text-sky-600 font-medium">Post your first ad!</button></p>';
                 return;
             }
 
@@ -885,7 +917,7 @@
             
         } catch (error) {
             console.error('Error loading my ads:', error);
-            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading ads: ' + error.message + '<br><button onclick="loadMyAds()" class="mt-2 px-4 py-2 bg-green-600 text-white rounded">Retry</button></p>';
+            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading ads: ' + error.message + '<br><button onclick="loadMyAds()" class="mt-2 px-4 py-2 bg-sky-600 text-white rounded">Retry</button></p>';
         }
     }
 
@@ -896,7 +928,7 @@
             document.getElementById('totalProducts').textContent = productsSnapshot.data().count;
 
             const usersSnapshot = await db.collection('users').count().get();
-            document.getElementById('totalFarmers').textContent = usersSnapshot.data().count;
+            document.getElementById('totalSuppliers').textContent = usersSnapshot.data().count;
 
             const locationsSnapshot = await db.collection('products').get();
             const uniqueLocations = new Set();
