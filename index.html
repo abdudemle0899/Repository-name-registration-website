@@ -365,7 +365,9 @@
     <div id="myadsTab" class="hidden max-w-7xl mx-auto p-6">
         <h3 class="text-2xl font-bold text-gray-800 mb-6">My Advertisements</h3>
         <div id="myAdsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <p class="text-gray-500 col-span-3 text-center py-10">You haven't posted any ads yet. <button onclick="showTab('post')" class="text-green-600 font-medium">Post your first ad!</button></p>
+            <div class="flex justify-center py-10 col-span-3">
+                <div class="loading-spinner"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -381,7 +383,7 @@
         appId: "1:266476222439:web:f1f06c9bb1b17775d3af42"
     };
 
-    // ☁️ CLOUDINARY CONFIG (Already configured!)
+    // ☁️ CLOUDINARY CONFIG
     const CLOUDINARY_CONFIG = {
         cloudName: 'de5casjbu',
         uploadPreset: 'agrimarket'
@@ -544,7 +546,6 @@
         if (input.files && input.files[0]) {
             const file = input.files[0];
             
-            // Show preview
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('imagePreview').src = e.target.result;
@@ -552,7 +553,6 @@
             };
             reader.readAsDataURL(file);
 
-            // Show progress
             document.getElementById('imageProgress').classList.remove('hidden');
 
             try {
@@ -570,7 +570,6 @@
         if (input.files && input.files[0]) {
             const file = input.files[0];
             
-            // Show preview
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('videoPreview').src = e.target.result;
@@ -578,7 +577,6 @@
             };
             reader.readAsDataURL(file);
 
-            // Show progress
             document.getElementById('videoProgress').classList.remove('hidden');
 
             try {
@@ -718,6 +716,45 @@
         container.innerHTML = products.map(product => createProductCard(product)).join('');
     }
 
+    // FIXED: Load My Ads
+    async function loadMyAds() {
+        const container = document.getElementById('myAdsGrid');
+        
+        if (!currentUser) {
+            container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">Please login to view your ads.</p>';
+            return;
+        }
+
+        try {
+            console.log('Loading ads for user:', currentUser.uid);
+            
+            // Get all products and filter client-side
+            const snapshot = await db.collection('products')
+                .where('sellerId', '==', currentUser.uid)
+                .get();
+            
+            console.log('Found', snapshot.size, 'ads');
+            
+            const products = [];
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                console.log('Ad:', data.title, data.sellerId);
+                products.push({ id: doc.id, ...data });
+            });
+
+            if (products.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">You haven\'t posted any ads yet. <button onclick="showTab(\'post\')" class="text-green-600 font-medium">Post your first ad!</button></p>';
+                return;
+            }
+
+            container.innerHTML = products.map(product => createProductCard(product)).join('');
+            
+        } catch (error) {
+            console.error('Error loading my ads:', error);
+            container.innerHTML = '<p class="text-red-500 col-span-3 text-center py-10">Error loading ads: ' + error.message + '<br><button onclick="loadMyAds()" class="mt-2 px-4 py-2 bg-green-600 text-white rounded">Retry</button></p>';
+        }
+    }
+
     function createProductCard(product) {
         const categoryIcons = {
             'Crops': 'ri-seedling-line',
@@ -790,27 +827,6 @@
     function filterCategory(category) {
         document.getElementById('searchCategory').value = category;
         applySearch();
-    }
-
-    // Load My Ads
-    async function loadMyAds() {
-        if (!currentUser) return;
-        
-        const snapshot = await db.collection('products')
-            .where('sellerId', '==', currentUser.uid)
-            .orderBy('createdAt', 'desc')
-            .get();
-        
-        const products = [];
-        snapshot.forEach(doc => products.push({ id: doc.id, ...doc.data() }));
-
-        const container = document.getElementById('myAdsGrid');
-        if (products.length === 0) {
-            container.innerHTML = '<p class="text-gray-500 col-span-3 text-center py-10">You haven\'t posted any ads yet. <button onclick="showTab(\'post\')" class="text-green-600 font-medium">Post your first ad!</button></p>';
-            return;
-        }
-
-        container.innerHTML = products.map(product => createProductCard(product)).join('');
     }
 
     // Load Stats
