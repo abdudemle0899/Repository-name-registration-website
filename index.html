@@ -3,1905 +3,1767 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABD Reverse Engineering & Design | EngiMarket Ethiopia</title>
-    <meta name="description" content="Professional Engineering Consulting, Reverse Engineering, Piping Design, Structural Analysis in Ethiopia">
-    <meta name="keywords" content="engineering, reverse engineering, piping design, structural analysis, Ethiopia, consulting, CAD, FEA, simulation">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Remix Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <!-- Fontsource Inter -->
-    <link href="https://cdn.jsdelivr.net/npm/fontsource-inter@5.0.16/index.css" rel="stylesheet">
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <!-- AOS Animation -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#4A90A4',
-                            600: '#3B7D8F',
-                            700: '#2C6A7A',
-                            800: '#1E5765',
-                            900: '#163E4D',
-                        },
-                        accent: {
-                            50: '#fff7ed',
-                            100: '#ffedd5',
-                            200: '#fed7aa',
-                            300: '#fdba74',
-                            400: '#fb923c',
-                            500: '#E87722',
-                            600: '#d4681e',
-                            700: '#bf5a1a',
-                            800: '#9a4816',
-                            900: '#753812',
-                        }
-                    },
-                    fontFamily: {
-                        'inter': ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
+    <title>Louie Smith - Photographer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fontsource-poppins@5.0.8/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --gold-color: #e2b86c;
+            --light-color: #f8f9fa;
+            --text-dark: #2d2d2d;
+            --text-muted: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            color: #333;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
             overflow-x: hidden;
         }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #4A90A4; border-radius: 8px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3B7D8F; }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(74, 144, 164, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(74, 144, 164, 0.6); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        @keyframes countUp {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        .fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-        .fade-in-left { animation: fadeInLeft 0.8s ease-out forwards; }
-        .fade-in-right { animation: fadeInRight 0.8s ease-out forwards; }
-        .float-animation { animation: float 3s ease-in-out infinite; }
-        .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
-        
-        /* Navbar */
-        .nav-fixed {
-            position: fixed;
-            top: 0; left: 0; right: 0;
+
+        /* Navigation */
+        .navbar {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
             z-index: 1000;
-            background: rgba(30, 87, 101, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease;
         }
-        .nav-fixed.scrolled {
-            background: rgba(22, 62, 77, 0.98);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-color) !important;
+            letter-spacing: 2px;
+        }
+
         .nav-link {
-            position: relative;
-            color: #e0f2fe;
+            color: rgba(255,255,255,0.8) !important;
             font-weight: 500;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1rem !important;
             transition: all 0.3s ease;
+            position: relative;
         }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold-color) !important;
+        }
+
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: -2px; left: 50%;
-            width: 0; height: 2px;
-            background: #E87722;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gold-color);
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
+
         .nav-link:hover::after, .nav-link.active::after {
             width: 80%;
         }
-        .nav-link:hover { color: #ffffff; }
-        .nav-link.active { color: #ffffff; }
-        
+
         /* Hero Section */
         .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            display: flex;
+            align-items: center;
             position: relative;
-            height: 100vh;
-            min-height: 700px;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            color: var(--gold-color);
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-title span {
+            color: var(--gold-color);
+        }
+
+        .hero-description {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .hero-btn {
+            background: var(--gold-color);
+            color: var(--primary-color);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(226, 184, 108, 0.3);
+            color: var(--primary-color);
+        }
+
+        .hero-image {
+            animation: fadeInRight 1s ease 0.8s both;
+        }
+
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            max-width: 100%;
+            height: auto;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--gold-color);
+            top: -100px;
+            right: -50px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            bottom: 100px;
+            left: -50px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--gold-color);
+            bottom: -50px;
+            right: 200px;
+            animation: float 7s ease-in-out infinite;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-dark {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .section-light {
+            background: var(--light-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold-color);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        /* Collection Grid */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .collection-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+        }
+
+        .collection-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .collection-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .collection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(26, 26, 46, 0.9) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .collection-item:hover .collection-overlay {
+            opacity: 1;
+        }
+
+        .collection-overlay h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-overlay span {
+            color: var(--gold-color);
+            font-size: 0.9rem;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            border-radius: 20px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            border: 3px solid var(--gold-color);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .hero-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(22, 62, 77, 0.85) 0%, rgba(74, 144, 164, 0.6) 50%, rgba(22, 62, 77, 0.75) 100%);
-        }
-        .hero-particles {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            overflow: hidden;
-        }
-        .particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            background: rgba(232, 119, 34, 0.6);
-            border-radius: 50%;
-            animation: float 4s ease-in-out infinite;
-        }
-        
-        /* Buttons */
-        .btn-primary {
-            background: linear-gradient(135deg, #E87722 0%, #d4681e 100%);
+            margin: 0 auto 1.5rem;
             color: white;
-            padding: 0.875rem 2rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
+            font-size: 2rem;
         }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(232, 119, 34, 0.4);
+
+        .service-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            padding: 0.875rem 2rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            text-decoration: none;
+
+        .service-card p {
+            color: var(--text-muted);
+            line-height: 1.7;
         }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #ffffff;
-            transform: translateY(-3px);
+
+        /* Blog */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
-        
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #1E5765;
-            margin-bottom: 0.5rem;
-        }
-        .section-header .underline {
-            width: 80px; height: 4px;
-            background: linear-gradient(90deg, #4A90A4, #E87722);
-            border-radius: 2px;
-            margin: 1rem auto;
-        }
-        .section-header p {
-            font-size: 1.125rem;
-            color: #6b7280;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Services Cards */
-        .service-card {
-            position: relative;
+
+        .blog-card {
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
-            border-radius: 0.75rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
         }
-        .service-card:hover {
+
+        .blog-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
         }
-        .service-card img {
-            width: 100%; height: 280px;
+
+        .blog-image {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
         }
-        .service-card:hover img {
+
+        .blog-card:hover .blog-image img {
             transform: scale(1.1);
         }
-        .service-card .service-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: linear-gradient(transparent, rgba(22, 62, 77, 0.95));
-            padding: 1.5rem;
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .blog-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .blog-content h4 a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .blog-content h4 a:hover {
+            color: var(--gold-color);
+        }
+
+        .blog-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .read-more {
+            color: var(--gold-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
-        .service-card:hover .service-overlay {
-            background: linear-gradient(transparent, rgba(22, 62, 77, 1));
+
+        .read-more:hover {
+            color: var(--accent-color);
         }
-        .service-card .service-overlay h3 {
+
+        /* Contact */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: var(--primary-color);
             color: white;
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+            padding: 3rem;
+            border-radius: 20px;
         }
-        .service-card .service-overlay p {
-            color: #bae6fd;
-            font-size: 0.875rem;
-            opacity: 0;
-            transform: translateY(10px);
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            width: 50px;
+            height: 50px;
+            background: rgba(226, 184, 108, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item h5 {
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-item p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .contact-form {
+            padding: 3rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold-color);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(15, 52, 96, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.7;
+        }
+
+        .footer h5 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
-        .service-card:hover .service-overlay p {
+
+        .social-links a:hover {
+            background: var(--gold-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Project Cards */
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        }
-        .project-card img {
-            width: 100%; height: 250px;
-            object-fit: cover;
-        }
-        .project-card .project-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(22, 62, 77, 0.85);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-        
-        /* News Cards */
-        .news-card {
-            background: white;
-            border-radius: 0.75rem;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-        }
-        .news-card img {
-            width: 100%; height: 200px;
-            object-fit: cover;
-        }
-        .news-card .news-content {
-            padding: 1.5rem;
-        }
-        .news-card .news-date {
-            color: #4A90A4;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        .news-card .news-title {
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: #1E5765;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-        .news-card .news-excerpt {
-            color: #6b7280;
-            font-size: 0.875rem;
-            line-height: 1.6;
-        }
-        
-        /* Stats Section */
-        .stats-section {
-            background: linear-gradient(135deg, #1E5765 0%, #4A90A4 50%, #1E5765 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .stats-section::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        .stat-item {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #E87722;
-            line-height: 1;
-        }
-        .stat-label {
-            color: #bae6fd;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-        }
-        
-        /* Footer */
-        .footer {
-            background: linear-gradient(180deg, #163E4D 0%, #0D2A33 100%);
-            color: #bae6fd;
-        }
-        .footer-link {
-            color: #bae6fd;
-            transition: all 0.3s ease;
-            display: block;
-            padding: 0.25rem 0;
-        }
-        .footer-link:hover {
-            color: #E87722;
-            transform: translateX(5px);
-        }
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: #bae6fd;
-            transition: all 0.3s ease;
-        }
-        .footer-social a:hover {
-            background: #E87722;
-            color: white;
-            transform: translateY(-3px);
-        }
-        
+
         /* Mobile Menu */
-        .mobile-menu {
-            position: fixed;
-            top: 0; right: -100%;
-            width: 320px;
-            height: 100vh;
-            background: #163E4D;
-            z-index: 2000;
-            transition: right 0.3s ease;
-            padding: 2rem;
-        }
-        .mobile-menu.open { right: 0; }
-        .mobile-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1999;
+        .mobile-menu-btn {
             display: none;
-        }
-        .mobile-overlay.open { display: block; }
-        
-        /* Chatbot Widget */
-        .chatbot-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 3000;
-        }
-        .chatbot-toggle {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4A90A4 0%, #1E5765 100%);
+            background: none;
+            border: none;
             color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 8px 30px rgba(74, 144, 164, 0.4);
-            transition: all 0.4s ease;
-            border: 3px solid white;
         }
-        .chatbot-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 40px rgba(74, 144, 164, 0.6);
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
         }
-        .chatbot-badge {
-            position: absolute;
-            top: -5px; right: -5px;
-            background: #E87722;
-            color: white;
-            border-radius: 50%;
-            min-width: 24px; height: 24px;
-            font-size: 0.75rem;
+
+        .pagination a {
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-        }
-        .chatbot-window {
-            position: fixed;
-            bottom: 110px;
-            right: 30px;
-            width: 400px;
-            max-height: 600px;
+            border-radius: 10px;
             background: white;
-            border-radius: 1rem;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            display: none;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-        .chatbot-window.open { display: flex; }
-        .chatbot-header {
-            padding: 1.25rem;
-            background: linear-gradient(135deg, #1E5765, #4A90A4);
+
+        .pagination a:hover, .pagination a.active {
+            background: var(--gold-color);
+            color: var(--primary-color);
+        }
+
+        /* Newsletter */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--accent-color), var(--gold-color));
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-section h3 {
             color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
         }
-        .chatbot-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-            background: #f8fafc;
+
+        .newsletter-section p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
             display: flex;
-            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
             gap: 1rem;
         }
-        .chat-message {
-            padding: 0.875rem 1.25rem;
-            border-radius: 1rem;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-        .chat-message.sent {
-            background: linear-gradient(135deg, #4A90A4, #1E5765);
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 0.25rem;
-        }
-        .chat-message.received {
-            background: white;
-            color: #333;
-            border: 1px solid #e5e7eb;
-            border-bottom-left-radius: 0.25rem;
-        }
-        .chatbot-footer {
-            padding: 1rem 1.25rem;
-            border-top: 1px solid #e5e7eb;
-            display: flex;
-            gap: 0.75rem;
-            background: white;
-        }
-        .chatbot-input {
+
+        .newsletter-form input {
             flex: 1;
-            padding: 0.75rem 1rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 0.5rem;
-            outline: none;
-            transition: border-color 0.3s;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
         }
-        .chatbot-input:focus {
-            border-color: #4A90A4;
-        }
-        .chatbot-send {
-            padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #4A90A4, #1E5765);
+
+        .newsletter-form button {
+            background: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        .chatbot-send:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 144, 164, 0.3);
-        }
-        
-        /* Auth Modal */
-        .auth-modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            z-index: 5000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            display: none;
-        }
-        .auth-modal.open { display: flex; }
-        .auth-content {
-            background: white;
-            border-radius: 1.5rem;
-            width: 100%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2.5rem;
-            animation: fadeInUp 0.4s ease-out;
-        }
-        
-        /* Products Marketplace */
-        .product-card {
-            background: white;
-            border-radius: 0.75rem;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            position: relative;
         }
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+        .newsletter-form button:hover {
+            background: var(--secondary-color);
         }
-        .product-card img {
-            width: 100%; height: 220px;
-            object-fit: cover;
-            transition: transform 0.3s;
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
-        .product-card:hover img {
-            transform: scale(1.05);
+
+        .lightbox.active {
+            display: flex;
         }
-        .product-fav {
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 10px;
+            cursor: default;
+        }
+
+        .lightbox-close {
             position: absolute;
-            top: 12px; right: 12px;
-            width: 36px; height: 36px;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary-color);
+                padding: 1rem;
+                flex-direction: column;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-section {
+                text-align: center;
+                padding-top: 100px;
+            }
+
+            .hero-description {
+                margin: 0 auto 2rem;
+            }
+
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--gold-color);
+            color: var(--primary-color);
             border-radius: 50%;
-            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            border: none;
+            font-size: 1.2rem;
         }
-        .product-fav:hover {
-            transform: scale(1.15);
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
-        .product-fav.active {
-            background: #ef4444;
-            color: white;
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(226, 184, 108, 0.3);
         }
-        
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-section { min-height: 600px; }
-            .section-header h2 { font-size: 2rem; }
-            .stat-number { font-size: 2.5rem; }
+
+        /* Loading animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
         }
-        @media (max-width: 768px) {
-            .nav-desktop { display: none; }
-            .hero-section { min-height: 500px; }
-            .hero-content h1 { font-size: 2rem; }
-            .hero-content p { font-size: 1rem; }
-            .section-header h2 { font-size: 1.75rem; }
-            .stat-number { font-size: 2rem; }
-            .chatbot-window { width: calc(100vw - 40px); right: 20px; bottom: 100px; }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
-        
-        /* Loading Spinner */
-        .loading-spinner {
-            width: 40px; height: 40px;
-            border: 4px solid #e5e7eb;
-            border-top: 4px solid #4A90A4;
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(226, 184, 108, 0.2);
+            border-top-color: var(--gold-color);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
+
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-        
-        /* Carousel */
-        .carousel-container {
-            overflow: hidden;
-            position: relative;
-        }
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        .carousel-slide {
-            min-width: 33.333%;
-            padding: 0 0.75rem;
-        }
-        @media (max-width: 768px) {
-            .carousel-slide { min-width: 100%; }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .carousel-slide { min-width: 50%; }
         }
     </style>
 </head>
 <body>
-    <!-- ============================================
-    NAVIGATION
-    ============================================ -->
-    <nav class="nav-fixed" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <a href="#" class="flex items-center gap-3" onclick="scrollToSection('hero')">
-                    <div class="w-12 h-12 bg-gradient-to-br from-accent-500 to-accent-600 rounded-lg flex items-center justify-center shadow-lg">
-                        <i class="ri-settings-4-line text-white text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold text-white leading-tight">ABD</h1>
-                        <p class="text-[10px] text-primary-200 font-medium tracking-wider">REVERSE ENGINEERING & DESIGN</p>
-                    </div>
-                </a>
-                
-                <!-- Desktop Navigation -->
-                <div class="nav-desktop flex items-center gap-1">
-                    <a href="#hero" class="nav-link active" onclick="scrollToSection('hero')">Home</a>
-                    <a href="#services" class="nav-link" onclick="scrollToSection('services')">Services</a>
-                    <a href="#projects" class="nav-link" onclick="scrollToSection('projects')">Projects</a>
-                    <a href="#marketplace" class="nav-link" onclick="scrollToSection('marketplace')">Marketplace</a>
-                    <a href="#news" class="nav-link" onclick="scrollToSection('news')">News</a>
-                    <a href="#about" class="nav-link" onclick="scrollToSection('about')">About</a>
-                    <a href="#contact" class="nav-link" onclick="scrollToSection('contact')">Contact</a>
-                    <button onclick="openAuthModal()" class="btn-primary ml-4">
-                        <i class="ri-login-circle-line"></i> Login
-                    </button>
-                </div>
-                
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-white text-2xl" onclick="toggleMobileMenu()">
-                    <i class="ri-menu-3-line"></i>
-                </button>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Preview" id="lightbox-img">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#home">LOUIE</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#collection" class="nav-link">Collection</a>
+                <a href="#about" class="nav-link">About Me</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="flex justify-between items-center mb-8">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-accent-500 rounded-lg flex items-center justify-center">
-                    <i class="ri-settings-4-line text-white text-xl"></i>
-                </div>
-                <span class="text-xl font-bold text-white">ABD</span>
-            </div>
-            <button onclick="toggleMobileMenu()" class="text-white text-2xl">
-                <i class="ri-close-line"></i>
-            </button>
-        </div>
-        <div class="space-y-1">
-            <a href="#hero" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition" onclick="toggleMobileMenu()">Home</a>
-            <a href="#services" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition" onclick="toggleMobileMenu()">Services</a>
-            <a href="#projects" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition" onclick="toggleMobileMenu()">Projects</a>
-            <a href="#marketplace" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition" onclick="toggleMobileMenu()">Marketplace</a>
-            <a href="#news" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition" onclick="toggleMobileMenu()">News</a>
-            <a href="#about" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition" onclick="toggleMobileMenu()">About</a>
-            <a href="#contact" class="block text-white py-3 px-4 rounded-lg hover:bg-white/10 transition" onclick="toggleMobileMenu()">Contact</a>
-        </div>
-        <button onclick="openAuthModal(); toggleMobileMenu();" class="btn-primary w-full mt-8 justify-center">
-            <i class="ri-login-circle-line"></i> Login / Register
-        </button>
-    </div>
 
-    <!-- ============================================
-    HERO SECTION
-    ============================================ -->
-    <section class="hero-section" id="hero">
-        <div class="hero-bg" style="background-image: url('https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/17ecba247-206a-4a5e-ade4-040ba6f2e797.png');"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-particles" id="heroParticles"></div>
-        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center hero-content">
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6 border border-white/20">
-                <span class="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></span>
-                <span class="text-primary-200 text-sm font-medium">Engineering Excellence in Ethiopia</span>
-            </div>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
-                Precision Design.<br>
-                <span class="text-accent-400">Integrated Analysis.</span><br>
-                Innovative Solutions.
-            </h1>
-            <p class="text-lg md:text-xl text-primary-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-                ABD Reverse Engineering & Design delivers cutting-edge engineering consulting services including piping design, structural analysis, mechanical design, and advanced simulation across Ethiopia and beyond.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#services" class="btn-primary text-lg" onclick="scrollToSection('services')">
-                    <i class="ri-arrow-right-line"></i> Explore Services
-                </a>
-                <a href="#contact" class="btn-secondary text-lg" onclick="scrollToSection('contact')">
-                    <i class="ri-customer-service-2-line"></i> Contact Us
-                </a>
-            </div>
-            <!-- Scroll Indicator -->
-            <div class="mt-16 animate-bounce">
-                <i class="ri-arrow-down-s-line text-white/50 text-3xl"></i>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
         </div>
-    </section>
-
-    <!-- ============================================
-    STATS SECTION
-    ============================================ -->
-    <section class="stats-section py-16">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
-                    <div class="stat-number" data-target="150">0</div>
-                    <div class="stat-label">Projects Completed</div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <p class="hero-subtitle">Hello! I'm</p>
+                    <h1 class="hero-title">Louie Smith<br><span>A Photographer</span></h1>
+                    <p class="hero-description">I Capture Life. A professional photographer from America, specializing in fashion, nature, and portrait photography. Let me tell your story through my lens.</p>
+                    <a href="#collection" class="hero-btn">View My Work</a>
                 </div>
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-number" data-target="50">0</div>
-                    <div class="stat-label">Expert Engineers</div>
-                </div>
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-number" data-target="12">0</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
-                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-number" data-target="98">0</div>
-                    <div class="stat-label">Client Satisfaction %</div>
+                <div class="col-lg-6 hero-image">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1fbe3d767-4e72-443d-9d2e-3d3339b5e303.png" alt="Louie Smith - Photographer">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    SERVICES SECTION
-    ============================================ -->
-    <section class="py-20 bg-gray-50" id="services">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Core Engineering Services</h2>
-                <div class="underline"></div>
-                <p>Design & Simulation Excellence — Comprehensive solutions tailored to your project needs</p>
+    <!-- Collection Section -->
+    <section class="section section-light" id="collection">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>My Collection</h2>
+                <p>Browse through my portfolio of carefully curated photographs across various categories</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Service 1 -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="0">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="Engineering Design" loading="lazy">
-                    <div class="service-overlay">
-                        <h3>Engineering Design</h3>
-                        <p>Complete piping design, 3D modeling & P&ID development for industrial projects</p>
+            <div class="filter-buttons animate-on-scroll">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="model">Model</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="fashion">Fashion</button>
+                <button class="filter-btn" data-filter="travel">Travel</button>
+            </div>
+            <div class="collection-grid" id="collectionGrid">
+                <div class="collection-item animate-on-scroll" data-category="model">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1d7feb2c4-c65e-4152-98da-898e9adbd0ac.png" alt="Model Photo">
+                    <div class="collection-overlay">
+                        <h4>Photo 01</h4>
+                        <span>Model</span>
                     </div>
                 </div>
-                <!-- Service 2 -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="Project Consulting" loading="lazy" style="filter: hue-rotate(20deg);">
-                    <div class="service-overlay">
-                        <h3>Project Consulting</h3>
-                        <p>Whole process engineering consulting from feasibility to commissioning</p>
+                <div class="collection-item animate-on-scroll" data-category="nature">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/19512e333-6b01-417c-8d09-d280bf495407.png" alt="Nature Photo">
+                    <div class="collection-overlay">
+                        <h4>Photo 02</h4>
+                        <span>Nature</span>
                     </div>
                 </div>
-                <!-- Service 3 -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="Supervision" loading="lazy" style="filter: hue-rotate(40deg);">
-                    <div class="service-overlay">
-                        <h3>Engineering Supervision</h3>
-                        <p>On-site supervision ensuring quality, safety, and adherence to specifications</p>
+                <div class="collection-item animate-on-scroll" data-category="fashion">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/11d5d6389-f0b5-4b7b-8f0c-b5fd6f4abb30.png" alt="Fashion Photo">
+                    <div class="collection-overlay">
+                        <h4>Photo 03</h4>
+                        <span>Fashion</span>
                     </div>
                 </div>
-                <!-- Service 4 -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="Stress Analysis" loading="lazy" style="filter: hue-rotate(180deg);">
-                    <div class="service-overlay">
-                        <h3>Stress & Structural Analysis</h3>
-                        <p>Full FEA (Finite Element Analysis) for piping & steel structures</p>
+                <div class="collection-item animate-on-scroll" data-category="travel">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/12f27e610-0772-4638-82f1-639d7fcb6948.png" alt="Travel Photo">
+                    <div class="collection-overlay">
+                        <h4>Photo 04</h4>
+                        <span>Travel</span>
                     </div>
                 </div>
-                <!-- Service 5 -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="Reverse Engineering" loading="lazy" style="filter: hue-rotate(200deg);">
-                    <div class="service-overlay">
-                        <h3>Reverse Engineering</h3>
-                        <p>Precise 3D scanning-to-CAD workflows and component reconstruction</p>
+                <div class="collection-item animate-on-scroll" data-category="travel">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/12f27e610-0772-4638-82f1-639d7fcb6948.png" alt="Travel Photo 2">
+                    <div class="collection-overlay">
+                        <h4>Photo 05</h4>
+                        <span>Travel</span>
                     </div>
                 </div>
-                <!-- Service 6 -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="Technical Simulation" loading="lazy" style="filter: hue-rotate(220deg);">
-                    <div class="service-overlay">
-                        <h3>Technical Simulation</h3>
-                        <p>2D/3D Earth & Rail simulations and load distribution analysis</p>
+                <div class="collection-item animate-on-scroll" data-category="travel">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/12f27e610-0772-4638-82f1-639d7fcb6948.png" alt="Travel Photo 3">
+                    <div class="collection-overlay">
+                        <h4>Photo 06</h4>
+                        <span>Travel</span>
+                    </div>
+                </div>
+                <div class="collection-item animate-on-scroll" data-category="fashion model">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1d7feb2c4-c65e-4152-98da-898e9adbd0ac.png" alt="Fashion Model Photo">
+                    <div class="collection-overlay">
+                        <h4>Photo 07</h4>
+                        <span>Fashion, Model</span>
+                    </div>
+                </div>
+                <div class="collection-item animate-on-scroll" data-category="nature">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1c6284e32-3cb8-49d2-af33-51e8e067b690.png" alt="Nature Photo 2">
+                    <div class="collection-overlay">
+                        <h4>Photo 08</h4>
+                        <span>Nature</span>
+                    </div>
+                </div>
+                <div class="collection-item animate-on-scroll" data-category="model">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1fbe3d767-4e72-443d-9d2e-3d3339b5e303.png" alt="Model Photo 2">
+                    <div class="collection-overlay">
+                        <h4>Photo 09</h4>
+                        <span>Model</span>
+                    </div>
+                </div>
+                <div class="collection-item animate-on-scroll" data-category="fashion">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/11d5d6389-f0b5-4b7b-8f0c-b5fd6f4abb30.png" alt="Fashion Photo 2">
+                    <div class="collection-overlay">
+                        <h4>Photo 10</h4>
+                        <span>Fashion</span>
+                    </div>
+                </div>
+                <div class="collection-item animate-on-scroll" data-category="model">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1d7feb2c4-c65e-4152-98da-898e9adbd0ac.png" alt="Model Photo 3">
+                    <div class="collection-overlay">
+                        <h4>Photo 11</h4>
+                        <span>Model</span>
+                    </div>
+                </div>
+                <div class="collection-item animate-on-scroll" data-category="nature">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1c6284e32-3cb8-49d2-af33-51e8e067b690.png" alt="Photography">
+                    <div class="collection-overlay">
+                        <h4>Photo 12</h4>
+                        <span>Photography</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    PROJECTS SECTION
-    ============================================ -->
-    <section class="py-20 bg-white" id="projects">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Our Projects</h2>
-                <div class="underline"></div>
-                <p>ABD people perform their duties conscientiously, act proactively, and strictly control the gates to ensure quality and safety of each project</p>
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Nice To Meet You</h2>
+                <p>Learn more about my journey as a photographer</p>
             </div>
-            <div class="carousel-container" id="projectsCarousel">
-                <div class="carousel-track" id="carouselTrack">
-                    <!-- Project 1 -->
-                    <div class="carousel-slide">
-                        <div class="project-card">
-                            <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/130150049-add8-4dd7-8cd7-245e7bce210c.png" alt="Industrial Complex" loading="lazy">
-                            <div class="project-overlay">
-                                <span class="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">Piping Design</span>
-                                <h3 class="text-white text-xl font-bold text-center px-4">Industrial Plant Piping System</h3>
-                                <p class="text-primary-200 text-center mt-2 text-sm px-4">Complete 3D piping design and P&ID for a petrochemical plant</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 2 -->
-                    <div class="carousel-slide">
-                        <div class="project-card">
-                            <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/17ecba247-206a-4a5e-ade4-040ba6f2e797.png" alt="High-Rise Construction" loading="lazy">
-                            <div class="project-overlay">
-                                <span class="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">Structural Analysis</span>
-                                <h3 class="text-white text-xl font-bold text-center px-4">High-Rise Steel Structure</h3>
-                                <p class="text-primary-200 text-center mt-2 text-sm px-4">FEA and structural analysis for a 20-story commercial building</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="carousel-slide">
-                        <div class="project-card">
-                            <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="Engineering Project" loading="lazy" style="filter: hue-rotate(60deg);">
-                            <div class="project-overlay">
-                                <span class="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">Supervision</span>
-                                <h3 class="text-white text-xl font-bold text-center px-4">Infrastructure Project</h3>
-                                <p class="text-primary-200 text-center mt-2 text-sm px-4">Full engineering supervision of a major infrastructure development</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 4 -->
-                    <div class="carousel-slide">
-                        <div class="project-card">
-                            <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/130150049-add8-4dd7-8cd7-245e7bce210c.png" alt="Manufacturing Facility" loading="lazy" style="filter: hue-rotate(30deg);">
-                            <div class="project-overlay">
-                                <span class="bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-2">Reverse Engineering</span>
-                                <h3 class="text-white text-xl font-bold text-center px-4">Manufacturing Facility</h3>
-                                <p class="text-primary-200 text-center mt-2 text-sm px-4">Reverse engineering and 3D scanning for equipment upgrade</p>
-                            </div>
-                        </div>
+            <div class="about-content">
+                <div class="about-image animate-on-scroll">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1fbe3d767-4e72-443d-9d2e-3d3339b5e303.png" alt="About Louie Smith">
+                </div>
+                <div class="about-text animate-on-scroll">
+                    <h3>My Name is Louie Smith</h3>
+                    <p>I am a professional photographer from America, passionate about capturing life's most beautiful moments. With years of experience in fashion, nature, and portrait photography, I bring a unique perspective to every project.</p>
+                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
                     </div>
                 </div>
-                <div class="flex justify-center gap-3 mt-6">
-                    <button onclick="moveCarousel(-1)" class="w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center hover:bg-primary-700 transition">
-                        <i class="ri-arrow-left-s-line text-xl"></i>
-                    </button>
-                    <button onclick="moveCarousel(1)" class="w-12 h-12 rounded-full bg-primary-600 text-white flex items-center justify-center hover:bg-primary-700 transition">
-                        <i class="ri-arrow-right-s-line text-xl"></i>
-                    </button>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item animate-on-scroll">
+                    <span class="stat-number" data-count="500">0</span>
+                    <span class="stat-label">Pounds of Equipment</span>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <span class="stat-number" data-count="1200">0</span>
+                    <span class="stat-label">Studio Sessions</span>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <span class="stat-number" data-count="3500">0</span>
+                    <span class="stat-label">Finished Photosessions</span>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <span class="stat-number" data-count="800">0</span>
+                    <span class="stat-label">Happy Clients</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    MARKETPLACE SECTION
-    ============================================ -->
-    <section class="py-20 bg-gray-50" id="marketplace">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Engineering Marketplace</h2>
-                <div class="underline"></div>
-                <p>Buy and sell engineering products, tools, and equipment — Ethiopia's premier engineering marketplace</p>
+    <!-- Services Section -->
+    <section class="section section-dark" id="services">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>My Services</h2>
+                <p style="color: rgba(255,255,255,0.6);">Professional photography services tailored to your needs</p>
             </div>
-            
-            <!-- Search & Filter -->
-            <div class="bg-white rounded-2xl p-6 mb-8 shadow-lg" data-aos="fade-up">
-                <div class="flex flex-wrap gap-4 items-end">
-                    <div class="flex-1 min-w-[200px]">
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Search</label>
-                        <input type="text" id="marketSearch" placeholder="Search products..." class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
                     </div>
-                    <div class="w-full sm:w-auto min-w-[150px]">
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Category</label>
-                        <select id="marketCategory" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                            <option value="">All Categories</option>
-                            <option value="Tools">Tools</option>
-                            <option value="Machinery">Machinery</option>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Construction">Construction</option>
-                            <option value="Electrical">Electrical</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="w-full sm:w-auto min-w-[150px]">
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Max Price (ETB)</label>
-                        <input type="number" id="marketMaxPrice" placeholder="Any" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                    </div>
-                    <button onclick="filterMarketplace()" class="btn-primary h-[50px]">
-                        <i class="ri-search-line"></i> Search
-                    </button>
+                    <h4>Portrait Photography</h4>
+                    <p>Capturing your personality and essence through carefully crafted portrait sessions in studio or on location.</p>
                 </div>
-            </div>
-
-            <!-- Products Grid -->
-            <div id="marketplaceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="loading-spinner mx-auto col-span-full"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-    ABOUT SECTION
-    ============================================ -->
-    <section class="py-20 bg-white" id="about">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <span class="text-accent-500 font-semibold text-sm tracking-wider uppercase">About ABD</span>
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-primary-900 mt-2 mb-6">Principal Engineering Consultant & Lead Designer</h2>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        ABD Reverse Engineering & Design is a premier engineering consulting firm based in Addis Ababa, Ethiopia. We specialize in delivering precision design, integrated analysis, and innovative solutions across diverse engineering disciplines.
-                    </p>
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <i class="ri-check-line text-white text-sm"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary-900">Complete Piping Design</h4>
-                                <p class="text-gray-600 text-sm">3D Modeling & P&ID Development</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <i class="ri-check-line text-white text-sm"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary-900">Advanced Reverse Engineering</h4>
-                                <p class="text-gray-600 text-sm">Precise 3D scanning-to-CAD workflows</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <div class="w-8 h-8 bg-accent-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                                <i class="ri-check-line text-white text-sm"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary-900">Mechanical Machine Design</h4>
-                                <p class="text-gray-600 text-sm">Custom machinery and component engineering</p>
-                            </div>
-                        </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-tshirt"></i>
                     </div>
-                    <a href="#contact" class="btn-primary" onclick="scrollToSection('contact')">
-                        <i class="ri-arrow-right-line"></i> Get In Touch
-                    </a>
+                    <h4>Fashion Photography</h4>
+                    <p>Showcasing fashion collections with stunning imagery that brings out the beauty of every design detail.</p>
                 </div>
-                <div data-aos="fade-left">
-                    <div class="relative">
-                        <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="ABD Team" class="rounded-2xl shadow-2xl w-full" style="filter: hue-rotate(300deg);">
-                        <div class="absolute -bottom-6 -left-6 bg-accent-500 text-white p-6 rounded-2xl shadow-xl">
-                            <div class="text-3xl font-extrabold">12+</div>
-                            <div class="text-sm opacity-90">Years of Excellence</div>
-                        </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-mountain"></i>
                     </div>
+                    <h4>Landscape Photography</h4>
+                    <p>Documenting nature's breathtaking beauty with artistic landscapes that capture the essence of each location.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h4>Travel Photography</h4>
+                    <p>Documenting journeys and destinations with vivid imagery that tells the story of each adventure.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Event Coverage</h4>
+                    <p>Professional coverage of events, capturing candid moments and important highlights throughout your special day.</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h4>Photo Editing</h4>
+                    <p>Expert post-processing and retouching services to enhance your images and bring out their full potential.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    NEWS SECTION
-    ============================================ -->
-    <section class="py-20 bg-gray-50" id="news">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Latest News</h2>
-                <div class="underline"></div>
-                <p>Discover the latest news and updates from ABD Engineering</p>
+    <!-- Blog Section -->
+    <section class="section section-light" id="blog">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Read Our Blog</h2>
+                <p>Insights, tips, and stories from my photography journey</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- News 1 -->
-                <div class="news-card" data-aos="fade-up" data-aos-delay="0">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/130150049-add8-4dd7-8cd7-245e7bce210c.png" alt="News" loading="lazy">
-                    <div class="news-content">
-                        <div class="news-date">
-                            <i class="ri-calendar-line mr-1"></i> June 15, 2025
+            <div class="blog-grid">
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/14d2cce71-d508-4a65-bfcd-912ea4dc3315.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Dec 14, 2024</span>
+                            <span><i class="far fa-folder"></i> Photography</span>
+                            <span><i class="far fa-comment"></i> 5 Comments</span>
                         </div>
-                        <h3 class="news-title">New Piping Design Software Integration</h3>
-                        <p class="news-excerpt">ABD announces integration with advanced CAD software for enhanced piping design workflows...</p>
-                        <a href="#" class="text-accent-500 font-semibold text-sm mt-3 inline-flex items-center gap-1 hover:gap-2 transition-all">
-                            Read More <i class="ri-arrow-right-line"></i>
-                        </a>
+                        <h4><a href="#">The Photography Technique</a></h4>
+                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia for your next shoot.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <!-- News 2 -->
-                <div class="news-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/17ecba247-206a-4a5e-ade4-040ba6f2e797.png" alt="News" loading="lazy">
-                    <div class="news-content">
-                        <div class="news-date">
-                            <i class="ri-calendar-line mr-1"></i> May 28, 2025
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1211bff1d-6bf8-49ea-8a16-013634f73e0f.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Dec 14, 2024</span>
+                            <span><i class="far fa-folder"></i> Photography</span>
+                            <span><i class="far fa-comment"></i> 3 Comments</span>
                         </div>
-                        <h3 class="news-title">Expansion of Structural Analysis Services</h3>
-                        <p class="news-excerpt">We're expanding our FEA capabilities with new software and trained specialists...</p>
-                        <a href="#" class="text-accent-500 font-semibold text-sm mt-3 inline-flex items-center gap-1 hover:gap-2 transition-all">
-                            Read More <i class="ri-arrow-right-line"></i>
-                        </a>
+                        <h4><a href="#">Mastering Light in Photography</a></h4>
+                        <p>Understanding how to use natural and artificial light can transform your photographs from good to extraordinary.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-                <!-- News 3 -->
-                <div class="news-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://image.qwenlm.ai/public_source/483c4345-6853-4483-a3a4-62b41957dab5/170d8dfa2-fcc9-4def-8caf-6f0fd15a6e3d.png" alt="News" loading="lazy" style="filter: hue-rotate(90deg);">
-                    <div class="news-content">
-                        <div class="news-date">
-                            <i class="ri-calendar-line mr-1"></i> May 10, 2025
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/19512e333-6b01-417c-8d09-d280bf495407.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Dec 14, 2024</span>
+                            <span><i class="far fa-folder"></i> Travel</span>
+                            <span><i class="far fa-comment"></i> 7 Comments</span>
                         </div>
-                        <h3 class="news-title">ABD Wins Major Infrastructure Contract</h3>
-                        <p class="news-excerpt">Proud to announce our selection for a major engineering supervision contract...</p>
-                        <a href="#" class="text-accent-500 font-semibold text-sm mt-3 inline-flex items-center gap-1 hover:gap-2 transition-all">
-                            Read More <i class="ri-arrow-right-line"></i>
-                        </a>
+                        <h4><a href="#">Travel Photography Tips</a></h4>
+                        <p>Essential tips for capturing stunning travel photographs that tell compelling stories of your adventures.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1d7feb2c4-c65e-4152-98da-898e9adbd0ac.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Nov 28, 2024</span>
+                            <span><i class="far fa-folder"></i> Fashion</span>
+                            <span><i class="far fa-comment"></i> 4 Comments</span>
+                        </div>
+                        <h4><a href="#">Fashion Photography Basics</a></h4>
+                        <p>Learn the fundamentals of fashion photography and how to create stunning images that showcase clothing beautifully.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1c6284e32-3cb8-49d2-af33-51e8e067b690.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Nov 15, 2024</span>
+                            <span><i class="far fa-folder"></i> Nature</span>
+                            <span><i class="far fa-comment"></i> 6 Comments</span>
+                        </div>
+                        <h4><a href="#">Capturing Nature's Beauty</a></h4>
+                        <p>Discover techniques for photographing nature that will help you capture the essence of the natural world.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1fbe3d767-4e72-443d-9d2e-3d3339b5e303.png" alt="Blog Post">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Oct 20, 2024</span>
+                            <span><i class="far fa-folder"></i> Photography</span>
+                            <span><i class="far fa-comment"></i> 8 Comments</span>
+                        </div>
+                        <h4><a href="#">Essential Camera Equipment</a></h4>
+                        <p>A comprehensive guide to the essential camera equipment every photographer should have in their toolkit.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination animate-on-scroll">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#"><i class="fas fa-chevron-right"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    CONTACT SECTION
-    ============================================ -->
-    <section class="py-20 bg-white" id="contact">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Contact Us</h2>
-                <div class="underline"></div>
-                <p>Get in touch with our engineering team for your project needs</p>
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h3 class="animate-on-scroll">Newsletter</h3>
+            <p class="animate-on-scroll">Subscribe to receive updates on my latest work and photography tips</p>
+            <form class="newsletter-form animate-on-scroll" id="newsletterForm">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2>Get In Touch</h2>
+                <p>Have a project in mind? Let's work together to create something beautiful</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Contact Info -->
-                <div class="space-y-6" data-aos="fade-right">
-                    <div class="bg-primary-50 rounded-2xl p-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="ri-phone-line text-white text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary-900">Phone</h4>
-                                <a href="tel:+251910298713" class="text-gray-600 hover:text-accent-500 transition">+251 910 298 713</a>
-                            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info animate-on-scroll">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h5>Address</h5>
+                            <p>198 West 21th Street, Suite 721<br>New York NY 10016</p>
                         </div>
                     </div>
-                    <div class="bg-primary-50 rounded-2xl p-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="ri-mail-line text-white text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary-900">Email</h4>
-                                <a href="mailto:abdudemle0899@gmail.com" class="text-gray-600 hover:text-accent-500 transition break-all">abdudemle0899@gmail.com</a>
-                            </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h5>Phone</h5>
+                            <p>+ 1235 2355 98</p>
                         </div>
                     </div>
-                    <div class="bg-primary-50 rounded-2xl p-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="ri-map-pin-line text-white text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary-900">Location</h4>
-                                <p class="text-gray-600">Addis Ababa, Ethiopia</p>
-                            </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h5>Email</h5>
+                            <p>info@yoursite.com</p>
                         </div>
                     </div>
-                    <div class="bg-primary-50 rounded-2xl p-6">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-primary-500 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i class="ri-global-line text-white text-2xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-primary-900">Portfolio</h4>
-                                <a href="mailto:ahdreverse@gmail.com" class="text-gray-600 hover:text-accent-500 transition">ahdreverse@gmail.com</a>
-                            </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <h5>Website</h5>
+                            <p>yoursite.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-question-circle"></i>
+                        <div>
+                            <h5>Have a Questions?</h5>
+                            <p>203 Fake St. Mountain View,<br>San Francisco, California, USA</p>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Contact Form -->
-                <div class="lg:col-span-2" data-aos="fade-left">
-                    <form id="contactForm" class="bg-white border-2 border-gray-100 rounded-2xl p-8 shadow-lg">
-                        <h3 class="text-2xl font-bold text-primary-900 mb-6">Send Us a Message</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-600 mb-1">Full Name *</label>
-                                <input type="text" id="contactName" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition" placeholder="Your name">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-gray-600 mb-1">Email *</label>
-                                <input type="email" id="contactEmail" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition" placeholder="your@email.com">
-                            </div>
+                <div class="contact-form animate-on-scroll">
+                    <h3>Send a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
                         </div>
-                        <div class="mb-5">
-                            <label class="block text-sm font-semibold text-gray-600 mb-1">Subject</label>
-                            <input type="text" id="contactSubject" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition" placeholder="Project inquiry">
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
                         </div>
-                        <div class="mb-6">
-                            <label class="block text-sm font-semibold text-gray-600 mb-1">Message *</label>
-                            <textarea id="contactMessage" required rows="5" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition resize-none" placeholder="Tell us about your project..."></textarea>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" class="form-control" placeholder="Enter subject" required>
                         </div>
-                        <button type="submit" class="btn-primary w-full justify-center text-lg">
-                            <i class="ri-send-plane-line"></i> Send Message
-                        </button>
-                        <div id="contactSuccess" class="hidden mt-4 p-4 bg-green-50 border-2 border-green-200 rounded-xl text-green-700 text-center font-semibold">
-                            <i class="ri-checkbox-circle-line mr-2"></i> Message sent successfully!
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Write your message here..." required></textarea>
                         </div>
+                        <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-    FOOTER
-    ============================================ -->
-    <footer class="footer pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                <!-- Company Info -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
                 <div>
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center">
-                            <i class="ri-settings-4-line text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white">ABD</h3>
-                            <p class="text-xs text-primary-300">Reverse Engineering & Design</p>
-                        </div>
-                    </div>
-                    <p class="text-primary-300 text-sm leading-relaxed mb-4">
-                        Precision Design. Integrated Analysis. Innovative Solutions. Your trusted engineering partner in Ethiopia.
-                    </p>
-                    <div class="footer-social flex gap-3">
-                        <a href="#"><i class="ri-facebook-fill"></i></a>
-                        <a href="#"><i class="ri-linkedin-fill"></i></a>
-                        <a href="#"><i class="ri-twitter-fill"></i></a>
-                        <a href="#"><i class="ri-instagram-fill"></i></a>
+                    <div class="footer-brand">LOUIE</div>
+                    <p>A professional photographer from America, capturing life's most beautiful moments through my lens. Let me tell your story through photography.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                
-                <!-- Quick Links -->
                 <div>
-                    <h4 class="text-white font-bold text-lg mb-4">Quick Links</h4>
-                    <a href="#hero" class="footer-link" onclick="scrollToSection('hero')">Home</a>
-                    <a href="#services" class="footer-link" onclick="scrollToSection('services')">Services</a>
-                    <a href="#projects" class="footer-link" onclick="scrollToSection('projects')">Projects</a>
-                    <a href="#marketplace" class="footer-link" onclick="scrollToSection('marketplace')">Marketplace</a>
-                    <a href="#about" class="footer-link" onclick="scrollToSection('about')">About Us</a>
-                    <a href="#contact" class="footer-link" onclick="scrollToSection('contact')">Contact</a>
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#collection">Collection</a></li>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
                 </div>
-                
-                <!-- Services -->
                 <div>
-                    <h4 class="text-white font-bold text-lg mb-4">Services</h4>
-                    <a href="#" class="footer-link">Piping Design</a>
-                    <a href="#" class="footer-link">Structural Analysis</a>
-                    <a href="#" class="footer-link">Reverse Engineering</a>
-                    <a href="#" class="footer-link">Machine Design</a>
-                    <a href="#" class="footer-link">Technical Simulation</a>
-                    <a href="#" class="footer-link">Engineering Supervision</a>
+                    <h5>Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Fashion (6)</a></li>
+                        <li><a href="#">Technology (8)</a></li>
+                        <li><a href="#">Travel (2)</a></li>
+                        <li><a href="#">Food (2)</a></li>
+                        <li><a href="#">Photography (7)</a></li>
+                    </ul>
                 </div>
-                
-                <!-- Contact -->
                 <div>
-                    <h4 class="text-white font-bold text-lg mb-4">Contact Info</h4>
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3 text-primary-300 text-sm">
-                            <i class="ri-phone-line text-accent-500"></i>
-                            <span>+251 910 298 713</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-primary-300 text-sm">
-                            <i class="ri-mail-line text-accent-500"></i>
-                            <span class="break-all">abdudemle0899@gmail.com</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-primary-300 text-sm">
-                            <i class="ri-map-pin-line text-accent-500"></i>
-                            <span>Addis Ababa, Ethiopia</span>
-                        </div>
-                    </div>
-                    <div class="mt-6">
-                        <h5 class="text-white font-semibold text-sm mb-2">Newsletter</h5>
-                        <div class="flex">
-                            <input type="email" placeholder="Your email" class="flex-1 px-4 py-2 rounded-l-lg bg-white/10 border border-white/20 text-white placeholder-primary-400 focus:outline-none text-sm">
-                            <button class="px-4 py-2 bg-accent-500 rounded-r-lg hover:bg-accent-600 transition">
-                                <i class="ri-send-plane-line text-white"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <h5>Archives</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">November 2024 (105)</a></li>
+                        <li><a href="#">October 2024 (212)</a></li>
+                        <li><a href="#">September 2024 (150)</a></li>
+                        <li><a href="#">August 2024 (100)</a></li>
+                        <li><a href="#">July 2024 (200)</a></li>
+                    </ul>
                 </div>
             </div>
-            
-            <!-- Bottom Footer -->
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-primary-400 text-sm">
-                    © 2025 ABD Reverse Engineering & Design. All rights reserved.
-                </p>
-                <div class="flex gap-6">
-                    <a href="#" class="text-primary-400 text-sm hover:text-accent-500 transition">Privacy Policy</a>
-                    <a href="#" class="text-primary-400 text-sm hover:text-accent-500 transition">Terms of Service</a>
-                </div>
+            <div class="footer-bottom">
+                <p>Copyright &copy; 2026 All rights reserved | This template is made with <i class="fas fa-heart" style="color: var(--gold-color);"></i> by <a href="#" style="color: var(--gold-color);">Colorlib</a></p>
             </div>
         </div>
     </footer>
 
-    <!-- ============================================
-    CHATBOT WIDGET
-    ============================================ -->
-    <div class="chatbot-widget">
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                        <i class="ri-robot-2-line text-xl"></i>
-                    </div>
-                    <div>
-                        <span class="font-bold">ABD Assistant</span>
-                        <p class="text-xs opacity-80">Engineering Support</p>
-                    </div>
-                </div>
-                <button onclick="toggleChatbot()" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition">
-                    <i class="ri-close-line"></i>
-                </button>
-            </div>
-            <div class="chatbot-body" id="chatbotBody">
-                <div class="chat-message received">
-                    👋 Hello! I'm ABD Assistant. How can I help you with engineering services today?
-                </div>
-                <div class="flex flex-wrap gap-2 mt-2">
-                    <button onclick="quickChat('What services do you offer?')" class="text-xs bg-primary-100 text-primary-800 px-3 py-1.5 rounded-full hover:bg-primary-200 transition font-medium">Our Services</button>
-                    <button onclick="quickChat('How to contact ABD?')" class="text-xs bg-primary-100 text-primary-800 px-3 py-1.5 rounded-full hover:bg-primary-200 transition font-medium">Contact Us</button>
-                    <button onclick="quickChat('Show me marketplace')" class="text-xs bg-primary-100 text-primary-800 px-3 py-1.5 rounded-full hover:bg-primary-200 transition font-medium">Marketplace</button>
-                    <button onclick="quickChat('What is reverse engineering?')" class="text-xs bg-primary-100 text-primary-800 px-3 py-1.5 rounded-full hover:bg-primary-200 transition font-medium">Reverse Engineering</button>
-                </div>
-            </div>
-            <div class="chatbot-footer">
-                <input type="text" id="chatbotInput" class="chatbot-input" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter')sendChatMessage()">
-                <button onclick="sendChatMessage()" class="chatbot-send">
-                    <i class="ri-send-plane-line"></i>
-                </button>
-            </div>
-        </div>
-        <div class="chatbot-toggle" onclick="toggleChatbot()">
-            <i class="ri-chat-4-line text-2xl"></i>
-            <span class="chatbot-badge" id="chatBadge">1</span>
-        </div>
-    </div>
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
-    <!-- ============================================
-    AUTH MODAL
-    ============================================ -->
-    <div class="auth-modal" id="authModal">
-        <div class="auth-content">
-            <div class="flex justify-between items-center mb-6">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
-                        <i class="ri-settings-4-line text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-primary-900">ABD</h3>
-                        <p class="text-xs text-gray-500">Sign in to your account</p>
-                    </div>
-                </div>
-                <button onclick="closeAuthModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition">
-                    <i class="ri-close-line text-gray-500"></i>
-                </button>
-            </div>
-            
-            <!-- Login Form -->
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Email Address</label>
-                    <input type="email" id="loginEmail" required placeholder="you@company.com" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Password</label>
-                    <input type="password" id="loginPassword" required placeholder="Enter password" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                </div>
-                <div class="flex items-center justify-between">
-                    <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" class="w-4 h-4 rounded">
-                        <span class="text-sm text-gray-600">Remember me</span>
-                    </label>
-                    <a href="#" class="text-sm text-primary-600 font-semibold hover:underline">Forgot password?</a>
-                </div>
-                <button type="submit" class="btn-primary w-full justify-center">
-                    <i class="ri-login-circle-line"></i> Sign In
-                </button>
-            </form>
-            
-            <!-- Register Form (hidden by default) -->
-            <form id="registerForm" class="space-y-4 hidden">
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Full Name *</label>
-                        <input type="text" id="regName" required placeholder="Your name" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Phone</label>
-                        <input type="tel" id="regPhone" placeholder="+251 XXX XXX XXX" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Email Address *</label>
-                    <input type="email" id="regEmail" required placeholder="you@company.com" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">User Type</label>
-                    <select id="regType" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                        <option value="Buyer">Buyer</option>
-                        <option value="Supplier">Supplier</option>
-                        <option value="Both">Both</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Password *</label>
-                    <input type="password" id="regPassword" required minlength="6" placeholder="Min 6 characters" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none transition">
-                </div>
-                <button type="submit" class="btn-primary w-full justify-center">
-                    <i class="ri-user-add-line"></i> Create Account
-                </button>
-            </form>
-            
-            <div class="mt-6 text-center">
-                <p class="text-sm text-gray-600">
-                    <span id="authToggleText">Don't have an account?</span>
-                    <button onclick="toggleAuthForm()" class="text-primary-600 font-bold hover:underline" id="authToggleBtn">Sign Up</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============================================
-    JAVASCRIPT
-    ============================================ -->
     <script>
-        // Firebase Config
-        const firebaseConfig = {
-            apiKey: "AIzaSyBInthZ2BKHiy1hdvUvBdnngGDTBsceTUE",
-            authDomain: "registration-system-8719c.firebaseapp.com",
-            projectId: "registration-system-8719c",
-            storageBucket: "registration-system-8719c.firebasestorage.app",
-            messagingSenderId: "266476222439",
-            appId: "1:266476222439:web:f1f06c9bb1b17775d3af42"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        
-        // Global State
-        let currentUser = null;
-        let currentUserData = null;
-        let productsCache = [];
-        let favoritesList = [];
-        let carouselIndex = 0;
-        let isLoginForm = true;
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({ duration: 800, once: true, offset: 100 });
-            createParticles();
-            initNavbar();
-            loadMarketplace();
-            initCounters();
+        // Loader
+        window.addEventListener('load', () => {
+            document.getElementById('loader').classList.add('hidden');
         });
-        
-        // Particles
-        function createParticles() {
-            const container = document.getElementById('heroParticles');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 4 + 's';
-                particle.style.animationDuration = (3 + Math.random() * 3) + 's';
-                particle.style.width = (2 + Math.random() * 4) + 'px';
-                particle.style.height = particle.style.width;
-                container.appendChild(particle);
+
+        // Navigation
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-        }
-        
-        // Navbar scroll
-        function initNavbar() {
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
+
+            // Scroll to top button
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.scrollY > 500) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+
+            // Active nav link based on scroll position
+            const sections = document.querySelectorAll('section[id]');
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
                 }
             });
-        }
-        
-        // Scroll to section
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-            // Update active nav
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
-            if (activeLink) activeLink.classList.add('active');
-        }
-        
-        // Mobile Menu
-        function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('open');
-            document.getElementById('mobileOverlay').classList.toggle('open');
-        }
-        
-        // Carousel
-        function moveCarousel(direction) {
-            const track = document.getElementById('carouselTrack');
-            const slides = track.querySelectorAll('.carousel-slide');
-            const slideWidth = slides[0].offsetWidth;
-            const totalSlides = slides.length;
-            
-            if (window.innerWidth <= 768) {
-                carouselIndex += direction;
-            } else if (window.innerWidth <= 1024) {
-                carouselIndex += direction;
-            } else {
-                carouselIndex += direction;
-            }
-            
-            if (carouselIndex < 0) carouselIndex = totalSlides - 1;
-            if (carouselIndex >= totalSlides) carouselIndex = 0;
-            
-            const offset = carouselIndex * slideWidth;
-            track.style.transform = `translateX(-${offset}px)`;
-        }
-        
-        // Counter Animation
-        function initCounters() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counters = entry.target.querySelectorAll('.stat-number');
-                        counters.forEach(counter => {
-                            const target = parseInt(counter.getAttribute('data-target'));
-                            const duration = 2000;
-                            const step = target / (duration / 16);
-                            let current = 0;
-                            const timer = setInterval(() => {
-                                current += step;
-                                if (current >= target) {
-                                    counter.textContent = target + '+';
-                                    clearInterval(timer);
-                                } else {
-                                    counter.textContent = Math.floor(current);
-                                }
-                            }, 16);
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            
-            const statsSection = document.querySelector('.stats-section');
-            if (statsSection) observer.observe(statsSection);
-        }
-        
-        // Marketplace
-        async function loadMarketplace(filters = {}) {
-            const container = document.getElementById('marketplaceGrid');
-            try {
-                const snapshot = await db.collection('products')
-                    .where('status', '==', 'active')
-                    .get();
-                
-                let products = [];
-                snapshot.forEach(doc => {
-                    products.push({ id: doc.id, ...doc.data() });
-                });
-                
-                // Sort by newest
-                products.sort((a, b) => {
-                    const timeA = a.createdAt?.seconds || 0;
-                    const timeB = b.createdAt?.seconds || 0;
-                    return timeB - timeA;
-                });
-                
-                productsCache = products;
-                
-                if (filters.category) {
-                    products = products.filter(p => p.category === filters.category);
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
                 }
-                if (filters.maxPrice) {
-                    products = products.filter(p => (p.price || 0) <= filters.maxPrice);
-                }
-                if (filters.search) {
-                    const s = filters.search.toLowerCase();
-                    products = products.filter(p => 
-                        p.title.toLowerCase().includes(s) || 
-                        (p.description && p.description.toLowerCase().includes(s))
-                    );
-                }
-                
-                if (products.length === 0) {
-                    container.innerHTML = `
-                        <div class="col-span-full text-center py-16">
-                            <i class="ri-shopping-bag-line text-6xl text-gray-300 mb-4 block"></i>
-                            <p class="text-gray-500 text-lg">No products found</p>
-                            <button onclick="showTab('post')" class="mt-4 text-primary-600 font-semibold hover:underline">Be the first to post!</button>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                container.innerHTML = products.map(product => createProductCard(product)).join('');
-            } catch (error) {
-                console.error('Marketplace error:', error);
-                container.innerHTML = `
-                    <div class="col-span-full text-center py-16">
-                        <i class="ri-error-warning-line text-6xl text-red-300 mb-4 block"></i>
-                        <p class="text-gray-500 text-lg">Error loading products</p>
-                        <button onclick="loadMarketplace()" class="mt-4 btn-primary inline-flex">Retry</button>
-                    </div>
-                `;
-            }
-        }
-        
-        function createProductCard(product) {
-            const mainImage = product.imageUrls?.[0] || product.imageUrl || '';
-            const isFav = favoritesList.includes(product.id);
-            
-            return `
-                <div class="product-card">
-                    ${mainImage 
-                        ? `<img src="${mainImage}" alt="${product.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                           <div class="h-[220px] bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center hidden">
-                               <i class="ri-shopping-bag-line text-6xl text-white/50"></i>
-                           </div>`
-                        : `<div class="h-[220px] bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                               <i class="ri-shopping-bag-line text-6xl text-white/50"></i>
-                           </div>`
-                    }
-                    <div class="product-fav ${isFav ? 'active' : ''}" onclick="toggleFavorite('${product.id}')">
-                        <i class="${isFav ? 'ri-heart-fill' : 'ri-heart-line'}"></i>
-                    </div>
-                    <div class="p-4">
-                        <span class="text-xs font-semibold text-primary-600 bg-primary-50 px-2 py-1 rounded-full">${product.category || 'Other'}</span>
-                        <h3 class="font-bold text-primary-900 mt-2 mb-1 truncate">${product.title}</h3>
-                        <p class="text-accent-500 font-extrabold text-xl mb-2">${product.price ? product.price.toLocaleString() + ' ETB' : 'Price on request'}</p>
-                        <p class="text-gray-500 text-sm line-clamp-2 mb-3">${product.description || ''}</p>
-                        <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                            <i class="ri-map-pin-line"></i> ${product.location || 'Ethiopia'}
-                        </div>
-                        <div class="flex gap-2">
-                            ${product.phone ? `
-                                <a href="tel:${product.phone}" class="flex-1 bg-primary-500 text-white py-2 rounded-lg text-center text-sm font-semibold hover:bg-primary-600 transition">
-                                    <i class="ri-phone-line"></i> Call
-                                </a>
-                                <a href="https://wa.me/${product.phone.replace(/[^0-9]/g, '')}" target="_blank" class="flex-1 bg-green-500 text-white py-2 rounded-lg text-center text-sm font-semibold hover:bg-green-600 transition">
-                                    <i class="ri-whatsapp-line"></i> WhatsApp
-                                </a>
-                            ` : `
-                                <span class="flex-1 bg-gray-100 text-gray-400 py-2 rounded-lg text-center text-sm font-semibold">No contact info</span>
-                            `}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-        
-        function filterMarketplace() {
-            const filters = {
-                search: document.getElementById('marketSearch').value,
-                category: document.getElementById('marketCategory').value,
-                maxPrice: parseFloat(document.getElementById('marketMaxPrice').value) || null
-            };
-            loadMarketplace(filters);
-        }
-        
-        // Favorites
-        async function toggleFavorite(productId) {
-            if (!currentUser) {
-                openAuthModal();
-                return;
-            }
-            try {
-                const favRef = db.collection('users').doc(currentUser.uid).collection('favorites');
-                const doc = await favRef.doc(productId).get();
-                
-                if (doc.exists) {
-                    await favRef.doc(productId).delete();
-                    favoritesList = favoritesList.filter(id => id !== productId);
-                } else {
-                    await favRef.doc(productId).set({
-                        productId: productId,
-                        addedAt: firebase.firestore.FieldValue.serverTimestamp()
-                    });
-                    favoritesList.push(productId);
-                }
-                loadMarketplace();
-            } catch (error) {
-                console.error('Favorite error:', error);
-            }
-        }
-        
-        // Auth
-        auth.onAuthStateChanged(async user => {
-            if (user) {
-                currentUser = user;
-                try {
-                    const userDoc = await db.collection('users').doc(user.uid).get();
-                    currentUserData = userDoc.exists ? userDoc.data() : { fullName: user.email.split('@')[0], email: user.email };
-                } catch (e) {
-                    currentUserData = { fullName: user.email.split('@')[0], email: user.email };
-                }
-                // Update UI
-                document.querySelectorAll('.nav-desktop .btn-primary').forEach(btn => {
-                    btn.innerHTML = `<i class="ri-user-line"></i> ${currentUserData?.fullName?.split(' ')[0] || 'Account'}`;
-                    btn.onclick = () => showUserMenu();
-                });
-                loadFavorites();
-            } else {
-                currentUser = null;
-                currentUserData = null;
-            }
+            });
         });
-        
-        async function loadFavorites() {
-            if (!currentUser) return;
-            try {
-                const snapshot = await db.collection('users').doc(currentUser.uid).collection('favorites').get();
-                favoritesList = [];
-                snapshot.forEach(doc => favoritesList.push(doc.data().productId));
-            } catch (e) {
-                console.error('Load favs error:', e);
-            }
-        }
-        
-        function openAuthModal() {
-            document.getElementById('authModal').classList.add('open');
-        }
-        
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.remove('open');
-        }
-        
-        function toggleAuthForm() {
-            isLoginForm = !isLoginForm;
-            document.getElementById('loginForm').classList.toggle('hidden', !isLoginForm);
-            document.getElementById('registerForm').classList.toggle('hidden', isLoginForm);
-            document.getElementById('authToggleText').textContent = isLoginForm ? "Don't have an account?" : 'Already have an account?';
-            document.getElementById('authToggleBtn').textContent = isLoginForm ? 'Sign Up' : 'Sign In';
-        }
-        
-        // Login
-        document.getElementById('loginForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerHTML = '<div class="loading-spinner w-5 h-5 border-2" style="border-color:rgba(255,255,255,0.3);border-top-color:white;"></div> Signing in...';
-            try {
-                await auth.signInWithEmailAndPassword(
-                    document.getElementById('loginEmail').value,
-                    document.getElementById('loginPassword').value
-                );
-                closeAuthModal();
-            } catch (error) {
-                alert('Login error: ' + error.message);
-                btn.disabled = false;
-                btn.innerHTML = '<i class="ri-login-circle-line"></i> Sign In';
-            }
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
         });
-        
-        // Register
-        document.getElementById('registerForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = this.querySelector('button[type="submit"]');
-            btn.disabled = true;
-            btn.innerHTML = '<div class="loading-spinner w-5 h-5 border-2" style="border-color:rgba(255,255,255,0.3);border-top-color:white;"></div> Creating...';
-            try {
-                const cred = await auth.createUserWithEmailAndPassword(
-                    document.getElementById('regEmail').value,
-                    document.getElementById('regPassword').value
-                );
-                await db.collection('users').doc(cred.user.uid).set({
-                    fullName: document.getElementById('regName').value,
-                    email: document.getElementById('regEmail').value,
-                    phone: document.getElementById('regPhone').value,
-                    userType: document.getElementById('regType').value,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                closeAuthModal();
-            } catch (error) {
-                alert('Registration error: ' + error.message);
-                btn.disabled = false;
-                btn.innerHTML = '<i class="ri-user-add-line"></i> Create Account';
-            }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
         });
-        
-        function showUserMenu() {
-            if (confirm('Do you want to logout?')) {
-                auth.signOut();
-                window.location.reload();
-            }
-        }
-        
-        // Chatbot
-        function toggleChatbot() {
-            const w = document.getElementById('chatbotWindow');
-            w.classList.toggle('open');
-            if (w.classList.contains('open')) {
-                document.getElementById('chatBadge').classList.add('hidden');
-            }
-        }
-        
-        function quickChat(text) {
-            document.getElementById('chatbotInput').value = text;
-            sendChatMessage();
-        }
-        
-        async function sendChatMessage() {
-            const input = document.getElementById('chatbotInput');
-            const text = input.value.trim();
-            if (!text) return;
-            
-            const body = document.getElementById('chatbotBody');
-            body.innerHTML += `<div class="chat-message sent">${text}</div>`;
-            input.value = '';
-            body.scrollTop = body.scrollHeight;
-            
-            // Typing indicator
-            body.innerHTML += `<div class="chat-message received" id="typingMsg"><div class="flex gap-1"><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0.1s"></span><span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay:0.2s"></span></div></div>`;
-            
-            setTimeout(() => {
-                const typing = document.getElementById('typingMsg');
-                if (typing) typing.remove();
-                
-                let response = getChatResponse(text.toLowerCase());
-                body.innerHTML += `<div class="chat-message received">${response}</div>`;
-                body.scrollTop = body.scrollHeight;
-            }, 800 + Math.random() * 600);
-        }
-        
-        function getChatResponse(input) {
-            if (input.includes('hello') || input.includes('hi') || input.includes('hey')) {
-                return '👋 Hello! How can I assist you with our engineering services today?';
-            }
-            if (input.includes('service')) {
-                return '🔧 We offer: <br>• Complete Piping Design (3D & P&ID)<br>• Stress & Structural Analysis (FEA)<br>• Mechanical Machine Design<br>• Advanced Reverse Engineering<br>• Technical Simulation<br>• Engineering Supervision<br><br>Scroll to Services section or ask about any specific service!';
-            }
-            if (input.includes('contact') || input.includes('phone') || input.includes('email')) {
-                return '📞 Contact ABD:<br>• Phone: +251 910 298 713<br>• Email: abdudemle0899@gmail.com<br>• Location: Addis Ababa, Ethiopia<br><br>Scroll to Contact section for our form!';
-            }
-            if (input.includes('marketplace') || input.includes('product') || input.includes('buy') || input.includes('sell')) {
-                return '🛒 Check out our Engineering Marketplace! We have tools, machinery, electronics, and more from Ethiopian suppliers.<br><br>Scroll down to see available products!';
-            }
-            if (input.includes('reverse') || input.includes('scanning') || input.includes('cad')) {
-                return '🔄 Our Reverse Engineering services include:<br>• 3D scanning of physical components<br>• CAD model reconstruction<br>• Dimensional analysis<br>• Tolerance verification<br>• Component reproduction<br><br>Perfect for legacy equipment and custom parts!';
-            }
-            if (input.includes('price') || input.includes('cost')) {
-                return '💰 Pricing depends on project scope. Contact us for a free consultation and quote. We offer competitive rates for all engineering services.';
-            }
-            if (input.includes('pipe') || input.includes('piping')) {
-                return '🔩 Our Piping Design services include:<br>• 3D piping modeling<br>• P&ID development<br>• Pipe stress analysis<br>• Isometric drawings<br>• Material specifications<br>• Support design';
-            }
-            if (input.includes('fea') || input.includes('stress') || input.includes('structural')) {
-                return '🏗️ Structural Analysis services:<br>• Finite Element Analysis (FEA)<br>• Static & dynamic analysis<br>• Thermal analysis<br>• Buckling analysis<br>• Fatigue analysis<br>• Code compliance checks';
-            }
-            if (input.includes('location') || input.includes('where') || input.includes('address')) {
-                return '📍 We are located in Addis Ababa, Ethiopia. We serve clients across Ethiopia and internationally.';
-            }
-            return '🤖 I can help with information about our engineering services, contact details, marketplace products, and more. Try asking about our services, contact info, or products!';
-        }
-        
-        // Contact Form
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const success = document.getElementById('contactSuccess');
-            success.classList.remove('hidden');
-            this.reset();
-            setTimeout(() => success.classList.add('hidden'), 5000);
-        });
-        
-        // Close modal on outside click
-        document.getElementById('authModal').addEventListener('click', function(e) {
-            if (e.target === this) closeAuthModal();
-        });
-        
-        // Smooth scroll for all anchor links
+
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
-        
-        // Active nav on scroll
-        window.addEventListener('scroll', function() {
-            const sections = ['hero', 'services', 'projects', 'marketplace', 'news', 'about', 'contact'];
-            let current = '';
-            sections.forEach(id => {
-                const section = document.getElementById(id);
-                if (section) {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top <= 100) current = id;
+
+        // Scroll to top
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Collection Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const collectionItems = document.querySelectorAll('.collection-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                collectionItems.forEach(item => {
+                    const category = item.getAttribute('data-category');
+                    if (filter === 'all' || category.includes(filter)) {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeInUp 0.5s ease forwards';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+
+        collectionItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Scroll Animation
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('animated');
                 }
             });
-            if (current) {
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                const activeLink = document.querySelector(`.nav-link[href="#${current}"]`);
-                if (activeLink) activeLink.classList.add('active');
-            }
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();
+
+        // Counter Animation
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const rect = counter.getBoundingClientRect();
+                if (rect.top < window.innerHeight && !counter.classList.contains('counted')) {
+                    counter.classList.add('counted');
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.floor(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+                    updateCounter();
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateCounters);
+        animateCounters();
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.submit-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            btn.style.background = '#28a745';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+                e.target.reset();
+            }, 3000);
+        });
+
+        // Newsletter Form
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.textContent;
+            btn.textContent = 'Subscribed!';
+            btn.style.background = '#28a745';
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                e.target.reset();
+            }, 3000);
+        });
+
+        // Pagination
+        document.querySelectorAll('.pagination a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.pagination a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+            });
         });
     </script>
 </body>
