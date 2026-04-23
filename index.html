@@ -703,84 +703,102 @@
             margin-top: 0.5rem;
         }
 
-        /* Certificates */
+        /* Certificates Gallery */
         .certificates-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             margin-top: 3rem;
         }
 
-        .certificate-card {
+        .certificate-item {
             background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .certificate-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        .certificate-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
         }
 
-        .certificate-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-1);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 auto 1rem;
+        .certificate-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .certificate-card h5 {
+        .certificate-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .certificate-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .certificate-info h5 {
             font-size: 1rem;
             color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
 
-        .certificate-card p {
+        .certificate-info p {
             color: var(--text-muted);
             font-size: 0.85rem;
         }
 
-        /* Stats */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
 
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 10px;
+            cursor: default;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
             transition: transform 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
         }
 
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            display: block;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+            background: rgba(255,255,255,0.2);
         }
 
         /* Projects Section */
@@ -1380,6 +1398,12 @@
         <div class="loader-spinner"></div>
     </div>
 
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Certificate Preview" id="lightbox-img">
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
         <div class="container">
@@ -1653,27 +1677,40 @@
                     <span class="education-badge"><i class="fas fa-medal"></i> Best Academic Achievement Medal</span>
                 </div>
             </div>
+            
+            <!-- Certificates Gallery -->
+            <div class="section-header animate-on-scroll" style="margin-top: 4rem;">
+                <h2>Certificates & Awards</h2>
+                <p>Professional certifications and academic achievements</p>
+            </div>
             <div class="certificates-grid">
-                <div class="certificate-card animate-on-scroll">
-                    <div class="certificate-icon">
-                        <i class="fas fa-medal"></i>
+                <div class="certificate-item animate-on-scroll" data-src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1d7feb2c4-c65e-4152-98da-898e9adbd0ac.png">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/1d7feb2c4-c65e-4152-98da-898e9adbd0ac.png" alt="Best Academic Achievement">
+                    <div class="certificate-info">
+                        <h5>Best Academic Achievement</h5>
+                        <p>Wollo University - Sept 2023</p>
                     </div>
-                    <h5>Best Academic Achievement</h5>
-                    <p>Wollo University - Sept 2023</p>
                 </div>
-                <div class="certificate-card animate-on-scroll">
-                    <div class="certificate-icon">
-                        <i class="fas fa-network-wired"></i>
+                <div class="certificate-item animate-on-scroll" data-src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/19512e333-6b01-417c-8d09-d280bf495407.png">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/19512e333-6b01-417c-8d09-d280bf495407.png" alt="CCNA Certificate">
+                    <div class="certificate-info">
+                        <h5>CCNAv7: Introduction to Networks</h5>
+                        <p>Cisco Networking Academy - Feb 2023</p>
                     </div>
-                    <h5>CCNA v7 Certification</h5>
-                    <p>Cisco Network Installation - Feb 2023</p>
                 </div>
-                <div class="certificate-card animate-on-scroll">
-                    <div class="certificate-icon">
-                        <i class="fas fa-language"></i>
+                <div class="certificate-item animate-on-scroll" data-src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/11d5d6389-f0b5-4b7b-8f0c-b5fd6f4abb30.png">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/11d5d6389-f0b5-4b7b-8f0c-b5fd6f4abb30.png" alt="English Certificate">
+                    <div class="certificate-info">
+                        <h5>English Language Certificate</h5>
+                        <p>Kenny American Language Center - Oct 2018</p>
                     </div>
-                    <h5>English Language Certificate</h5>
-                    <p>Kenny American Language Center - Oct 2018</p>
+                </div>
+                <div class="certificate-item animate-on-scroll" data-src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/12f27e610-0772-4638-82f1-639d7fcb6948.png">
+                    <img src="https://image.qwenlm.ai/public_source/697b547d-6135-4657-a279-18612e6a9321/12f27e610-0772-4638-82f1-639d7fcb6948.png" alt="Internship Certificate">
+                    <div class="certificate-info">
+                        <h5>Certificate of Recognition</h5>
+                        <p>Tikur Abay Transport - Feb 2023</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2060,6 +2097,40 @@
         // Scroll to top
         document.getElementById('scrollTop').addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Lightbox for certificates
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const certificateItems = document.querySelectorAll('.certificate-item');
+
+        certificateItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.getAttribute('data-src');
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         });
 
         // Scroll Animation
